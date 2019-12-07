@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 export default function ajax(url,data={},type="GET") {
     return new Promise((resolve, reject) => {
         let promise;
@@ -12,9 +13,13 @@ export default function ajax(url,data={},type="GET") {
                 Str = Str.substring(0,Str.lastIndexOf("&"));
                 url = url+"?"+Str;
             }
-            promise = axios.get(url);
+            promise = axios.get('/vue'+url,{
+                withCredentials:true
+            });
         }else{
-            promise = axios.post(url,data);
+            promise = axios.post('/vue'+url,data,{
+                withCredentials:true
+            });
         }
         promise.then(response=>{
             resolve(response.data)
