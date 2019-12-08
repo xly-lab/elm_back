@@ -17,8 +17,7 @@
 </script>
 
 <style scoped>
-.van-nav-bar{
+    .van-nav-bar{
     background-image: linear-gradient(to right,#88ed78,#3da9aa,#ecf5ff);
-    color: white;
 }
 </style>

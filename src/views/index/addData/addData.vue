@@ -1,18 +1,24 @@
 <template>
     <div>
-        <Header title="添加数据"/>
+        <div class="addData_body">
+            <van-cell-group >
+                <van-cell title="添加商铺" is-link to="index" />
+                <van-cell title="添加商品" is-link to="index" />
+            </van-cell-group >
+        </div>
     </div>
 </template>
 
 <script>
-    import Header from "../../../components/header/header";
+
     export default {
-        components:{
-            Header
-        }
+
     }
 </script>
 
 <style scoped>
+    .addData_body{
+        margin: 50px 0;
+    }
 
 </style>

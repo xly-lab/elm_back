@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css';
 
-import {Button,NavBar,Icon,CellGroup,Field,Tabbar,TabbarItem,Cell} from 'vant'
+import {Button,NavBar,Icon,CellGroup,Field,Tabbar,TabbarItem,Cell,Tag} from 'vant'
 
 Vue.use(ElementUI);
 
@@ -17,6 +17,7 @@ Vue.use(Field);
 Vue.use(Cell);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
+Vue.use(Tag);
 Vue.config.productionTip = false;
 
 new Vue({

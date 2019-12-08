@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Header title="首 页"/>
         <router-view/>
         <van-tabbar v-model="active"  active-color="#fff" inactive-color="#000">
             <van-tabbar-item  @click="replaceRouter('/index/fpage')" icon="wap-home">首页</van-tabbar-item>
@@ -13,11 +14,16 @@
 <script>
     import axios from 'axios'
     import Cookies from 'js-cookie'
+    import Header from "../../components/header/header";
+
     export default {
         data(){
             return{
                 active:0
             }
+        },
+        components:{
+            Header
         },
         mounted(){
             console.log(Cookies.get('_id'),this.active)
@@ -39,6 +45,12 @@
 <style scoped>
     .van-tabbar{
         background-image: linear-gradient(to right,#88ed78,#3da9aa);
+        color: white;
+    }
+    >>>.van-nav-bar{
+        position: fixed;
+        width: 100%;
+        top:0;
         color: white;
     }
 </style>

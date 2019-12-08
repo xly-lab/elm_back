@@ -1,18 +1,18 @@
 <template>
     <div>
-        <Header title="其 他"/>
+        <div class="other_body"></div>
     </div>
 </template>
 
 <script>
-    import Header from "../../../components/header/header";
+
     export default {
-        components:{
-            Header
-        }
+
     }
 </script>
 
 <style scoped>
-
+    .other_body{
+        margin: 50px 0 ;
+    }
 </style>
