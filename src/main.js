@@ -5,13 +5,20 @@ import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css';
 
-import {Button,NavBar,Icon,CellGroup,Field,Tabbar,TabbarItem,Cell,Tag} from 'vant'
+import {Button,NavBar,Icon,CellGroup,Field,
+  Tabbar,TabbarItem,Cell,Tag,Tab,List,Collapse,
+  CollapseItem,Overlay} from 'vant'
 
 Vue.use(ElementUI);
 
 Vue.use(Button);
+Vue.use(Collapse);
+Vue.use(Overlay);
+Vue.use(CollapseItem);
+Vue.use(List);
 Vue.use(NavBar);
 Vue.use(Icon);
+Vue.use(Tab);
 Vue.use(CellGroup);
 Vue.use(Field);
 Vue.use(Cell);

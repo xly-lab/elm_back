@@ -41,9 +41,8 @@
 </template>
 
 <script>
-    import {reqSaveUser,reqCookie} from '../../api'
+    import {reqSaveUser} from '../../api'
     import Header from "../../components/header/header";
-    import Cookies from  'js-cookie'
     export default {
         data(){
             return{
@@ -60,11 +59,7 @@
                 streetNumber:''
             }
         },
-        async beforeCreate(){
-            const _id = Cookies.get('_id');
-            const cooResult = await reqCookie({_id:_id});
-            if(cooResult.code===0) this.$router.replace('/index');
-        },
+
         mounted(){
             //获取当前用户的经纬度
             const getPoint = new BMap.Geolocation();

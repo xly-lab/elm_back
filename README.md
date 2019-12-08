@@ -42,3 +42,10 @@
 3. 完成四个组件addData,data,firstPage,other路由index文件配置
 4. 引入echarts组，简单实现树状图样式
 5. 简单布局完成tabbar组件并实现路由跳转
+
+> 2019/12/8
+1. 配置`数据管理`下的5个路由foodList,merchantList,orderList,userList,administratorList.
+2. 修改了Header组件，并使用headerConfig函数来控制该组件的显示
+3. 完成userList页面的静态布局
+4. 完成了merchantList页面的静态布局，除了使用vantui以外，还是用了element-ui的cascader组件，为这个组件添加了必要的data.js文件
+5. 对几个底部路由配置添加meta属性，来控制底部四个大导航的显示与隐藏

@@ -20,5 +20,8 @@
     .addData_body{
         margin: 50px 0;
     }
+    .van-cell{
+        text-align: left;
+    }
 
 </style>
