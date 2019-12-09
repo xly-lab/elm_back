@@ -81,6 +81,41 @@ export  function headerConfig (path) {
                 left_arrow:true
             };
             break;
+        case '/adddata/addfood':
+            headerConfigs ={
+                title:'添加商品',
+                left_text:'返回',
+                left_arrow:true
+            };
+            break;
+        case '/adddata/addmerchant':
+            headerConfigs ={
+                title:'添加商铺',
+                left_text:'返回',
+                left_arrow:true
+            };
+            break;
+        case '/other/distribution':
+            headerConfigs ={
+                title:'用户分布',
+                left_text:'返回',
+                left_arrow:true
+            };
+            break;
+        case '/other/admin':
+            headerConfigs ={
+                title:'管理员设置',
+                left_text:'返回',
+                left_arrow:true
+            };
+            break;
+        case '/other/instructions':
+            headerConfigs ={
+                title:'说明',
+                left_text:'返回',
+                left_arrow:true
+            };
+            break;
     }
     return headerConfigs;
 };

@@ -20,9 +20,9 @@
                                 <van-cell title="分类" value="内容" />
                             </div>
                             <div class="shop_info_handle">
-                                <van-button type="info" size="small" @click="show=true">编辑</van-button>
-                                <van-button type="info" size="small">添加商品</van-button>
-                                <van-button type="danger" size="small">删除</van-button>
+                                <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
+                                <van-button type="info" size="small" plain hairline @click="addFood">添加商品</van-button>
+                                <van-button type="danger" plain hairline size="small">删除</van-button>
                             </div>
                         </div>
                     </van-collapse-item>
@@ -39,6 +39,7 @@
             <van-overlay :show="show" @click="show = false">
                 <div class="wrapper" @click="show=false">
                     <div class="block" @click.stop>
+                        <h4>修改店铺信息</h4>
                         <van-cell-group>
                             <van-field
                                     v-model="shopName"
@@ -71,9 +72,21 @@
                                 <div>店铺分类</div>
                                 <el-cascader :options="options" clearable/>
                             </div>
+                            <div class="avatar_header">
+                                <div>店铺头像</div>
+                                <el-upload
+                                        class="avatar-uploader"
+                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        :show-file-list="false"
+                                        :on-success="handleAvatarSuccess"
+                                        :before-upload="beforeAvatarUpload">
+                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
                             <div class="button_">
-                                <van-button type="info" size="small">添加商品</van-button>
-                                <van-button type="danger" size="small">删除</van-button>
+                                <van-button type="info" plain hairline size="small">修改</van-button>
+                                <van-button type="danger" plain hairline size="small">取消</van-button>
                             </div>
                         </van-cell-group>
 
@@ -98,7 +111,8 @@
                 shopPhone:'',
                 shopMsg:'',
                 showClass:false,
-                options:[]
+                options:[],
+                imageUrl: ''
             }
         },
         mounted(){
@@ -112,6 +126,24 @@
             },
             compileInfo(){
 
+            },
+            addFood(){
+                this.$router.replace('/index/adddata')
+            },
+            handleAvatarSuccess(res, file) {
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
             }
         }
     }
@@ -147,7 +179,7 @@
 
     .block {
         width: 80%;
-        height: 264px;
+        height: 60%;
         background-color: #fff;
         border-radius: 10px;
         overflow: hidden;
@@ -159,6 +191,41 @@
         align-items: center;
         height: 40px;
         padding: 2px;
+    }
+    .avatar_header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 14px;
+        padding: 2px;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    >>>.el-upload{
+        width: 217px;
+
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 217px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+    }
+    .avatar {
+        width: 100px;
+        height: 100px;
+        display: block;
     }
     .button_{
         display: flex;

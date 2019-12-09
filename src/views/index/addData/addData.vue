@@ -2,8 +2,8 @@
     <div>
         <div class="addData_body">
             <van-cell-group >
-                <van-cell title="添加商铺" is-link to="index" />
-                <van-cell title="添加商品" is-link to="index" />
+                <van-cell title="添加商品" is-link to="/adddata/addfood" />
+                <van-cell title="添加商铺" is-link to="/adddata/addmerchant" />
             </van-cell-group >
         </div>
     </div>

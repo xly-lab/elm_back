@@ -1,197 +1,203 @@
 export default {
-    options: [{
-        value: 'zhinan',
-        label: '指南',
+    options: [
+        {
+        value: 'yiguoliaoli',
+        label: '异国料理',
         children: [{
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [{
-                value: 'yizhi',
-                label: '一致'
-            }, {
-                value: 'fankui',
-                label: '反馈'
-            }, {
-                value: 'xiaolv',
-                label: '效率'
-            }, {
-                value: 'kekong',
-                label: '可控'
-            }]
+            value: 'rihanliaoli',
+            label: '日韩料理',
         }, {
-            value: 'daohang',
-            label: '导航',
-            children: [{
-                value: 'cexiangdaohang',
-                label: '侧向导航'
-            }, {
-                value: 'dingbudaohang',
-                label: '顶部导航'
-            }]
+            value: 'xican',
+            label: '西餐',
+        },{
+            value: 'pisayimian',
+            label: '披萨意面',
+        },{
+            value: 'dongnanyacai',
+            label: '东南亚菜',
         }]
-    }, {
-        value: 'zujian',
-        label: '组件',
+    },
+        {
+        value: 'kuaicanbiandang',
+        label: '快餐便当',
         children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-                value: 'layout',
-                label: 'Layout 布局'
-            }, {
-                value: 'color',
-                label: 'Color 色彩'
-            }, {
-                value: 'typography',
-                label: 'Typography 字体'
-            }, {
-                value: 'icon',
-                label: 'Icon 图标'
-            }, {
-                value: 'button',
-                label: 'Button 按钮'
-            }]
+            value: 'jiancan',
+            label: '简餐',
         }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-                value: 'radio',
-                label: 'Radio 单选框'
-            }, {
-                value: 'checkbox',
-                label: 'Checkbox 多选框'
-            }, {
-                value: 'input',
-                label: 'Input 输入框'
-            }, {
-                value: 'input-number',
-                label: 'InputNumber 计数器'
-            }, {
-                value: 'select',
-                label: 'Select 选择器'
-            }, {
-                value: 'cascader',
-                label: 'Cascader 级联选择器'
-            }, {
-                value: 'switch',
-                label: 'Switch 开关'
-            }, {
-                value: 'slider',
-                label: 'Slider 滑块'
-            }, {
-                value: 'time-picker',
-                label: 'TimePicker 时间选择器'
-            }, {
-                value: 'date-picker',
-                label: 'DatePicker 日期选择器'
-            }, {
-                value: 'datetime-picker',
-                label: 'DateTimePicker 日期时间选择器'
-            }, {
-                value: 'upload',
-                label: 'Upload 上传'
-            }, {
-                value: 'rate',
-                label: 'Rate 评分'
-            }, {
-                value: 'form',
-                label: 'Form 表单'
-            }]
-        }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-                value: 'table',
-                label: 'Table 表格'
-            }, {
-                value: 'tag',
-                label: 'Tag 标签'
-            }, {
-                value: 'progress',
-                label: 'Progress 进度条'
-            }, {
-                value: 'tree',
-                label: 'Tree 树形控件'
-            }, {
-                value: 'pagination',
-                label: 'Pagination 分页'
-            }, {
-                value: 'badge',
-                label: 'Badge 标记'
-            }]
-        }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-                value: 'alert',
-                label: 'Alert 警告'
-            }, {
-                value: 'loading',
-                label: 'Loading 加载'
-            }, {
-                value: 'message',
-                label: 'Message 消息提示'
-            }, {
-                value: 'message-box',
-                label: 'MessageBox 弹框'
-            }, {
-                value: 'notification',
-                label: 'Notification 通知'
-            }]
-        }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-                value: 'menu',
-                label: 'NavMenu 导航菜单'
-            }, {
-                value: 'tabs',
-                label: 'Tabs 标签页'
-            }, {
-                value: 'breadcrumb',
-                label: 'Breadcrumb 面包屑'
-            }, {
-                value: 'dropdown',
-                label: 'Dropdown 下拉菜单'
-            }, {
-                value: 'steps',
-                label: 'Steps 步骤条'
-            }]
-        }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-                value: 'dialog',
-                label: 'Dialog 对话框'
-            }, {
-                value: 'tooltip',
-                label: 'Tooltip 文字提示'
-            }, {
-                value: 'popover',
-                label: 'Popover 弹出框'
-            }, {
-                value: 'card',
-                label: 'Card 卡片'
-            }, {
-                value: 'carousel',
-                label: 'Carousel 走马灯'
-            }, {
-                value: 'collapse',
-                label: 'Collapse 折叠面板'
-            }]
+            value: 'gaijiaofan',
+            label: '盖浇饭',
+        },{
+            value: 'mifenmianguan',
+            label: '米粉面馆',
+        },{
+            value: 'baozizhoudian',
+            label: '包子粥店',
+        },{
+            value: 'xiangguoshaguo',
+            label: '香锅砂锅',
+        },{
+            value: 'malatang',
+            label: '麻辣烫',
+        },{
+            value: 'jiaozihundun',
+            label: '饺子混沌',
+        },{
+            value: 'hanbao',
+            label: '汉堡',
+        },{
+            value: 'shengjianguotie',
+            label: '生煎锅贴',
+        },{
+            value: 'huangmenjimifan',
+            label: '黄焖鸡米饭',
+        },{
+            value: 'shaolafan',
+            label: '烧腊饭',
+        },{
+            value: 'baozaifan',
+            label: '煲仔饭',
+        },{
+            value: 'galifan',
+            label: '咖喱饭',
         }]
-    }, {
-        value: 'ziyuan',
-        label: '资源',
-        children: [{
-            value: 'axure',
-            label: 'Axure Components'
-        }, {
-            value: 'sketch',
-            label: 'Sketch Templates'
-        }, {
-            value: 'jiaohu',
-            label: '组件交互文档'
-        }]
-    }]
+    },
+        {
+            value: 'xiaochiyeixao',
+            label: '小吃夜宵',
+            children: [{
+                value: 'xiaolongxia',
+                label: '小龙虾',
+            }, {
+                value: 'difangxiaochi',
+                label: '地方小吃',
+            },{
+                value: 'shaokao',
+                label: '烧烤',
+            },{
+                value: 'zhajizhachuan',
+                label: '炸鸡炸串',
+            },{
+                value: 'yaboluwei',
+                label: '鸭脖卤味',
+            },{
+                value: 'lingshi',
+                label: '零食',
+            }]
+        },
+        {
+            value: 'guoshushengxian',
+            label: '果蔬生鲜',
+            children: [{
+                value: 'shuiguo',
+                label: '水果',
+            }, {
+                value: 'shengxian',
+                label: '生鲜',
+            },{
+                value: 'shucai',
+                label: '蔬菜',
+            },{
+                value: 'haixianshuichan',
+                label: '海鲜水产',
+            }]
+        },
+        {
+            value: 'tesecaixi',
+            label: '特色菜系',
+            children: [{
+                value: 'chuanxiangcai',
+                label: '川湘菜',
+            }, {
+                value: 'qitacaixi',
+                label: '其他菜系',
+            },{
+                value: 'jiangzhecai',
+                label: '江浙菜',
+            },{
+                value: 'yuecai',
+                label: '粤菜',
+            },{
+                value: 'haixian',
+                label: '海鲜',
+            },{
+                value: 'huoguogaoyu',
+                label: '火锅烤鱼',
+            },{
+                value: 'dongbeicai',
+                label: '东北菜',
+            },{
+                value: 'xibeicai',
+                label: '西北菜',
+            },{
+                value: 'yunnancai',
+                label: '云南菜',
+            },{
+                value: 'jinjiangcai',
+                label: '新疆菜',
+            },{
+                value: 'lucai',
+                label: '鲁菜',
+            }]
+        },
+        {
+            value: 'shangdianchaoshi',
+            label: '商店超市',
+            children: [{
+                value: 'chaoshi',
+                label: '超市',
+            }, {
+                value: 'bianlidian',
+                label: '便利店',
+            },{
+                value: 'mingjiufang',
+                label: '名酒坊',
+            },{
+                value: 'lingshiyinliao',
+                label: '零食饮料',
+            },{
+                value: 'shuizhan',
+                label: '水站',
+            },{
+                value: 'cha',
+                label: '茶',
+            },{
+                value: 'naizhan',
+                label: '奶站',
+            },{
+                value: 'liangyou',
+                label: '粮油',
+            },{
+                value: 'meizhuangmuying',
+                label: '美妆母婴',
+            }]
+        },
+        {
+            value: 'xianhuadangao',
+            label: '鲜花蛋糕',
+            children: [{
+                value: 'xianhua',
+                label: '鲜花',
+            }, {
+                value: 'dangao',
+                label: '蛋糕',
+            },{
+                value: 'mianbao',
+                label: '面包',
+            }]
+        },
+        {
+            value: 'tianpinyinpin',
+            label: '甜品饮品',
+            children: [{
+                value: 'naichaguozhi',
+                label: '奶茶果汁',
+            }, {
+                value: 'tianpin',
+                label: '甜品',
+            },{
+                value: 'kafei',
+                label: '咖啡',
+            }]
+        },
+    ]
 }

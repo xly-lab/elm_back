@@ -8,9 +8,9 @@
                     <div class="right">注册地</div>
                 </div>
                 <div class="list_item">
-                    <div class="left">注册时间</div>
-                    <div class="middle">用户名</div>
-                    <div class="right">注册地</div>
+                    <div class="left">2019/12/9</div>
+                    <div class="middle">xly</div>
+                    <div class="right">贵阳</div>
                 </div>
             </van-list>
         </div>

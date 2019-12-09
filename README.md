@@ -49,3 +49,9 @@
 3. 完成userList页面的静态布局
 4. 完成了merchantList页面的静态布局，除了使用vantui以外，还是用了element-ui的cascader组件，为这个组件添加了必要的data.js文件
 5. 对几个底部路由配置添加meta属性，来控制底部四个大导航的显示与隐藏
+
+> 2019/12/9
+1. 在路由配置文件里配置`添加数据`下的addMerchant,addFood和`其他`下的admin，distribution，instructions路由文件
+2. 并在headerConfig函数里配置上述路由文件的头部显示信息 
+3. 补充前一天的5个路由的静态显示页面
+4. 在merchantList组件里添加了element-ui的图片上传组件
