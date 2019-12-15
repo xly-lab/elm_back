@@ -3,13 +3,13 @@
         <div class="add_food">
             <el-form ref="form" :model="food" label-width="80px">
                 <el-form-item label="食物名称">
-                    <el-input v-model="food.name"></el-input>
+                    <el-input v-model="food.name"/>
                 </el-form-item>
                 <el-form-item label="食品活动">
-                    <el-input v-model="food.activities"></el-input>
+                    <el-input v-model="food.activities"/>
                 </el-form-item>
                 <el-form-item label="食品详情">
-                    <el-input v-model="food.detail"></el-input>
+                    <el-input v-model="food.detail"/>
                 </el-form-item>
                 <div class="avatar_header">
                     <div class="avatar_text">上传店铺头像</div>
@@ -48,37 +48,36 @@
 
                 <div class="more_specifications" v-show="food.specifications===1">
                     <el-button type="primary" @click="addSpecifications">添加规格</el-button>
-
-                    <el-table v-show="specificationsData.length>0"
-                              :data="specificationsData"
+                    <el-table v-show="tableData.length>0"
+                              :data="tableData"
                               style="width: 100%">
                         <el-table-column
-                                label="活动标题"
+                                label="规格名称"
                                 width="180">
                             <template slot-scope="scope">
-                                <span style="margin-left: 10px">{{ scope.row.activeTag }}</span>
+                                <span style="margin-left: 10px">{{ scope.row.specsName }}</span>
                             </template>
                         </el-table-column>
                         <el-table-column
-                                label="活动名称"
+                                label="包装费"
                                 width="180">
                             <template slot-scope="scope">
                                 <el-popover trigger="hover" placement="top">
-                                    <p>活动标题: {{ scope.row.activeName }}</p>
+                                    <p>包装费: {{ scope.row.packing_fee }}</p>
                                     <div slot="reference" class="name-wrapper">
-                                        <el-tag size="medium">{{ scope.row.activeName }}</el-tag>
+                                        <el-tag size="medium">{{ scope.row.packing_fee }}</el-tag>
                                     </div>
                                 </el-popover>
                             </template>
                         </el-table-column>
                         <el-table-column
-                                label="活动内容"
+                                label="价格"
                                 width="300">
                             <template slot-scope="scope">
                                 <el-popover trigger="hover" placement="top">
-                                    <p>住址: {{ scope.row.activeText }}</p>
+                                    <p>价格: {{ scope.row.price }}</p>
                                     <div slot="reference" class="name-wrapper">
-                                        <el-tag size="medium">{{ scope.row.activeText.length>20? scope.row.activeText.substring(0,20)+'...':scope.row.activeText}}</el-tag>
+                                        <el-tag size="medium">{{ scope.row.price}}</el-tag>
                                     </div>
                                 </el-popover>
                             </template>
@@ -92,27 +91,46 @@
                             </template>
                         </el-table-column>
                     </el-table>
+
                 </div>
 
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">立即创建</el-button>
                     <el-button>取消</el-button>
                 </el-form-item>
-                <el-dialog title="添加规格" v-model="dialogFormVisible">
-                    <el-form :rules="specsFormrules" :model="specsForm">
-                        <el-form-item label="规格" label-width="100px" prop="specs">
-                            <el-input v-model="specsForm.specs" auto-complete="off"></el-input>
+<!--                <el-dialog title="添加规格" v-show="dialogFormVisible">-->
+
+<!--                    <el-form :model="specsForm">-->
+<!--                        <el-form-item label="规格" label-width="100px" prop="specs">-->
+<!--                            <el-input v-model="specsForm.specs" auto-complete="off"></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="包装费" label-width="100px">-->
+<!--                            <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="价格" label-width="100px">-->
+<!--                            <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>-->
+<!--                        </el-form-item>-->
+<!--                    </el-form>-->
+<!--                    <div slot="footer" class="dialog-footer">-->
+<!--                        <el-button @click="dialogFormVisible = false">取 消</el-button>-->
+<!--                        <el-button type="primary" @click="addSpecs">确 定</el-button>-->
+<!--                    </div>-->
+<!--                </el-dialog>-->
+                <el-dialog title="添加规格" :visible.sync="dialogFormVisible">
+                    <el-form :model="specsForm">
+                        <el-form-item label="规格名称" label-width="120px">
+                            <el-input v-model="specsForm.specsName" autocomplete="off"></el-input>
                         </el-form-item>
-                        <el-form-item label="包装费" label-width="100px">
+                        <el-form-item label="包装费" label-width="120px">
                             <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
                         </el-form-item>
-                        <el-form-item label="价格" label-width="100px">
-                            <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
+                        <el-form-item label="价格" label-width="120px">
+                            <el-input-number v-model="specsForm.price" :min="0" :max="100"></el-input-number>
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
                         <el-button @click="dialogFormVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="addspecs">确 定</el-button>
+                        <el-button type="primary" @click="addSpecs">确 定</el-button>
                     </div>
                 </el-dialog>
             </el-form>
@@ -137,10 +155,10 @@
                 },
                 dialogImageUrl: '',
                 dialogVisible: false,
-                specificationsData:[],
+                tableData:[],
                 dialogFormVisible:false,
                 specsForm:{
-                    specs:'',
+                    specsName:'',
                     packing_fee:'',
                     price:''
                 }
@@ -158,7 +176,16 @@
                 console.log('e')
             },
             addSpecifications(){
+                this.dialogFormVisible = true;
+                console.log('e')
+            },
+            handleDelete(index,row){
+                this.tableData.splice(index,1);
 
+            },
+            addSpecs(){
+                this.tableData.unshift(this.specsForm);
+                this.dialogFormVisible = false;
             }
         }
     }
@@ -185,5 +212,14 @@
     .more_specifications,.single_specifications{
         text-align: center;
         margin: 10px 0;
+    }
+    >>>.el-dialog{
+        width: 80% !important;
+    }
+    >>>.el-dialog__body{
+        padding: 0;
+    }
+    >>>.el-input-number{
+        width: 100%;
     }
 </style>
