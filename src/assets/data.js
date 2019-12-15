@@ -199,5 +199,36 @@ export default {
                 label: '咖啡',
             }]
         },
-    ]
+    ],
+    activities:[
+        {
+        value: 'manjianyouhui',
+        label: '满减优惠',
+    }, {
+        value: 'youhuidachoubin',
+        label: '优惠大酬宾',
+    },{
+        value: 'xinyonghulijian',
+        label: '新用户立减',
+    },{
+        value: 'jindianlingjuan',
+        label: '进店领卷',
+    }],
+    tableData:[{
+        activeName: '王小虎',
+        activeTag: '减',
+        activeText: '上海市普陀区金沙江路 1518 弄'
+    }, {
+        activeName: '王小虎',
+        activeTag: '满',
+        activeText: '上海市普陀区金沙江路 1517 弄'
+    }, {
+        activeName: '王小虎',
+        activeTag: '送',
+        activeText: '上海市普陀区金沙江路 1519 看加拿大看见你的卡萨丁老妈唠叨里卡多烧录卡什么的弄'
+    }, {
+        activeName: '王小虎',
+        activeTag: '减',
+        activeText: '上海市普陀区金沙江路 1516 弄'
+    }]
 }

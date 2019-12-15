@@ -23,6 +23,7 @@
 
 <style scoped>
     .van-nav-bar{
-    background-image: linear-gradient(to right,#88ed78,#3da9aa,#ecf5ff);
-}
+        z-index: 2!important;
+        background-image: linear-gradient(to right,#88ed78,#3da9aa,#ecf5ff);
+    }
 </style>
