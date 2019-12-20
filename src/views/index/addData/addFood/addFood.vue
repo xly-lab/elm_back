@@ -42,7 +42,7 @@
                         <el-input-number v-model="food.packaging_fee" :min="0" :max="20"></el-input-number>
                     </el-form-item>
                     <el-form-item label="价格" prop="prise">
-                        <el-input-number v-model="food.prise" :min="0" :max="50"></el-input-number>
+                        <el-input-number v-model="food.price" :min="0" :max="50"></el-input-number>
                     </el-form-item>
                 </div>
 
@@ -96,26 +96,8 @@
 
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">立即创建</el-button>
-                    <el-button>取消</el-button>
+                    <el-button @click="$router.back()">取消</el-button>
                 </el-form-item>
-<!--                <el-dialog title="添加规格" v-show="dialogFormVisible">-->
-
-<!--                    <el-form :model="specsForm">-->
-<!--                        <el-form-item label="规格" label-width="100px" prop="specs">-->
-<!--                            <el-input v-model="specsForm.specs" auto-complete="off"></el-input>-->
-<!--                        </el-form-item>-->
-<!--                        <el-form-item label="包装费" label-width="100px">-->
-<!--                            <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>-->
-<!--                        </el-form-item>-->
-<!--                        <el-form-item label="价格" label-width="100px">-->
-<!--                            <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>-->
-<!--                        </el-form-item>-->
-<!--                    </el-form>-->
-<!--                    <div slot="footer" class="dialog-footer">-->
-<!--                        <el-button @click="dialogFormVisible = false">取 消</el-button>-->
-<!--                        <el-button type="primary" @click="addSpecs">确 定</el-button>-->
-<!--                    </div>-->
-<!--                </el-dialog>-->
                 <el-dialog title="添加规格" :visible.sync="dialogFormVisible">
                     <el-form :model="specsForm">
                         <el-form-item label="规格名称" label-width="120px">
@@ -139,20 +121,22 @@
 </template>
 
 <script>
+    import {Notify} from 'vant'
     export default {
         data(){
             return{
                 food: {
                     packaging_fee:'',//包装费
-                    prise:'',//价格
+                    price:'',//价格
                     name: '',//食品名
                     activities:'',//食品活动
                     detail:'',//食品详情
                     types:'',//店铺分类
                     introduce:'',//食品介绍
                     characteristics:1,//食物特点
-                    specifications:1//食品规格
+                    specifications:0//食品规格
                 },
+                food_shop_id:'',
                 dialogImageUrl: '',
                 dialogVisible: false,
                 tableData:[],
@@ -164,6 +148,9 @@
                 }
             }
         },
+        mounted(){
+
+        },
         methods: {
             handleRemove(file, fileList) {
                 console.log(file, fileList);
@@ -173,6 +160,9 @@
                 this.dialogVisible = true;
             },
             onSubmit(){
+                if(this.food.specifications===1){
+                    return this.$message.error('暂不支持多规格')
+                }
                 console.log('e')
             },
             addSpecifications(){
@@ -186,8 +176,11 @@
             addSpecs(){
                 this.tableData.unshift(this.specsForm);
                 this.dialogFormVisible = false;
-            }
-        }
+                setTimeout(()=>{
+                    this.$message.error('暂不支持多规格')
+                },500)
+            },
+        },
     }
 </script>
 

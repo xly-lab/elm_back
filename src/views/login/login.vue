@@ -130,8 +130,12 @@
                 };
                 const save_result = await reqSaveUser(info);
                 if(save_result.code!==1){
-                    this.$store.dispatch('set_user',info);
+                    this.$store.dispatch('set_user',save_result.data);
                     this.$router.replace('/index');
+                    this.$message({
+                        message: '登录成功',
+                        type: 'success'
+                    })
                 }else {
                     this.warningText=save_result.msg;
                     this.showWarning=true;

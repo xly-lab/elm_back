@@ -59,3 +59,39 @@
 > 2019/12/12
 1. 完成addMerchant组件的页面搭建，本页面为表单页面，存在数据较多
 2. 整个页面全用的element-ui组件
+
+
+> 2019/12/20
+1. 在other组件页面添加退出功能，退出时清除cookie
+2. 设计完成elm_back_shop_list数据表，其字段为(
+    shop_id,商铺id
+    shop_name,商铺名称
+    shop_address,商铺地址
+    shop_phone,商铺电话
+    shop_detail,商铺介绍
+    shop_tag,商铺标语
+    shop_type,商铺类型
+    shop_characteristics,商铺特点
+    shop_float_delivery_fee,配送费
+    shop_float_minimum_order_amount,起送价
+    shop_date1,营业初始时间
+    shop_date2,营业结束时间
+    shop_user_id商铺所属的用户id)
+3. 设计完成elm_back_shop_list的子表elm_back_shop_list_table_data,此表用于存放商铺里的活动信息其字段信息为（
+    active_name,活动名称
+    active_tag,活动标识
+    active_text,活动内容
+    shop_table_data_id,商铺数据表id标识
+    active_shop_id,活动所属的商铺id
+    ）
+4. 设计完成elm_back_food_list数据表，其字段为（
+    food_name,商品名称
+    food_id,商品唯一id
+    food_active,商品活动信息
+    food_detail,商品详情
+    food_characteristics,商品特点，0为新品，1为招牌
+    food_specifications,商品规格，0为单规格，1为多规格
+    food_packaging_fee,打包费
+    food_price,价格
+    food_shop_id商品所属的商铺id
+）
