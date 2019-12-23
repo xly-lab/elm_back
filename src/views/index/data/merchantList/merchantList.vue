@@ -1,23 +1,27 @@
 <template>
     <div>
         <div class="merchant-list">
-
-                <van-collapse v-model="activeNames">
-                    <van-collapse-item
-                        title="店铺名称"
-                        icon="shop-o">
-                        <div slot="title" class="title_header">标1
+            <van-list v-model="loading"
+                      :finished="finished"
+                      finished-text="没有更多了"
+                      @load="onLoad"
+                      error-text="请求失败，点击重新加载">
+                <van-collapse v-model="activeNames" accordion v-for="(item,key) in list">
+                    <van-collapse-item :name="key"
+                                       title="店铺名称"
+                            icon="shop-o">
+                        <div slot="title" class="title_header" >{{item.shop_name}}
                             <div class="more">查看详情</div>
                         </div>
                         <div class="shop_info">
                             <div class="shop_info_list">
-                                <van-cell title="店铺地址" value="内容内容内容内容内容内容内容内容内容内容" />
-                                <van-cell title="店铺介绍" value="内容" />
-                                <van-cell title="店铺ID" value="内容" />
-                                <van-cell title="联系电话" value="内容" />
-                                <van-cell title="评分" value="内容" />
-                                <van-cell title="销量" value="内容" />
-                                <van-cell title="分类" value="内容" />
+                                <van-cell title="店铺地址" :value="item.shop_address" />
+                                <van-cell title="店铺介绍" :value="item.shop_detail" />
+                                <van-cell title="店铺ID" :value="item.shop_id" />
+                                <van-cell title="联系电话" :value="item.shop_phone" />
+                                <van-cell title="评分" value="5" />
+                                <van-cell title="销量" :value="100" />
+                                <van-cell title="分类" :value="item.shop_type" />
                             </div>
                             <div class="shop_info_handle">
                                 <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
@@ -26,15 +30,9 @@
                             </div>
                         </div>
                     </van-collapse-item>
-                    <van-collapse-item
-                            title="标题2"
-                            icon="shop-o">
-                        <div slot="title" class="title_header">标1
-                            <div class="more">查看详情</div>
-                        </div>
-                        内容
-                    </van-collapse-item>
                 </van-collapse>
+            </van-list>
+
 <!--            </van-list>-->
             <van-overlay :show="show" @click="show = false">
                 <div class="wrapper" @click="show=false">
@@ -100,6 +98,8 @@
 
 <script>
     import options from '../../../../assets/data'
+    import { reqShopList } from '../../../../api'
+    let header = 0;
     export default {
         data(){
             return{
@@ -112,7 +112,11 @@
                 shopMsg:'',
                 showClass:false,
                 options:[],
-                imageUrl: ''
+                imageUrl: '',
+                list: [],
+                loading: false,
+                finished: false,
+                error:false
             }
         },
         mounted(){
@@ -144,14 +148,30 @@
                     this.$message.error('上传头像图片大小不能超过 2MB!');
                 }
                 return isJPG && isLt2M;
-            }
+            },
+            onLoad() {
+                // 异步更新数据
+                reqShopList({header,tail:header=header+10}).then((res)=>{
+                    console.log("res",res);
+                    this.list.push(...res.data);
+                    console.log(this.list);
+                    this.loading = false
+                }).catch(()=>{
+                    this.error = true;
+                }).finally(()=>{
+                    if(this.list.length%10!==0){
+                        this.finished = true;
+                    }
+                })
+
+            },
         }
     }
 </script>
 
 <style scoped>
     .merchant-list{
-        margin: 50px 0;
+        margin: 50px 0 0 0;
     }
 
     .title_header{

@@ -3,19 +3,19 @@
         <div class="add_merchant">
             <el-form ref="form" :model="shop" label-width="80px">
                 <el-form-item label="店铺名称">
-                    <el-input v-model="shop.name"></el-input>
+                    <el-input v-model="shop.name" placeholder="请输入商铺名称"></el-input>
                 </el-form-item>
                 <el-form-item label="详细地址">
-                    <el-input v-model="shop.detailAddress"></el-input>
+                    <el-input v-model="shop.detailAddress" placeholder="请输入详细地址"></el-input>
                 </el-form-item>
                 <el-form-item label="联系电话">
-                    <el-input v-model="shop.phone"></el-input>
+                    <el-input v-model="shop.phone" placeholder="请输入联系电话"></el-input>
                 </el-form-item>
                 <el-form-item label="店铺介绍">
-                    <el-input v-model="shop.introduce"></el-input>
+                    <el-input v-model="shop.introduce" placeholder="请输入店铺介绍"></el-input>
                 </el-form-item>
                 <el-form-item label="店铺标语">
-                    <el-input v-model="shop.tag"></el-input>
+                    <el-input v-model="shop.tag" placeholder="请输入店铺标语"></el-input>
                 </el-form-item>
                 <el-form-item label="店铺分类">
                     <el-cascader :options="options"  v-model="shop.types" clearable/>
@@ -139,6 +139,9 @@
 
 <script>
     import options from '../../../../assets/data'
+    import {Toast} from 'vant'
+    import {mapGetters} from 'vuex'
+    import {reqSaveShop} from '../../../../api'
     export default {
         data() {
             return {
@@ -169,6 +172,10 @@
             this.options=options.options;
             this.activities=options.activities;
             this.tableData=options.tableData;
+            console.log(this.userinfo);
+        },
+        computed:{
+            ...mapGetters(['userinfo'])
         },
         methods: {
             testL(res,file,fileList){
@@ -177,6 +184,59 @@
                 console.log('fileList：',fileList);
             },
             onSubmit() {
+                if(!this.shop.name){
+                    return Toast('请输入商铺名称');
+                }
+                if(!(/^[\u4e00-\u9fa5a-zA-Z]{2,12}$/.test(this.shop.name))){
+                    return Toast('商铺名称仅支持中英文字符');
+                }
+                if(!this.shop.detailAddress){
+                    return Toast('请输入详细地址');
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-,，.。 ]{0,40}$/.test(this.shop.detailAddress)){
+                    return Toast('详细地址仅支持中英文字符，数字，部分符号，且40个字符内');
+                }
+                if(!this.shop.phone){
+                    return Toast('请输入联系电话');
+                }
+                if(!/^1[3456789]\d{9}$/.test(this.shop.phone)){
+                    return Toast('请输入正确的联系电话');
+                }
+                if(!this.shop.introduce){
+                    return Toast('请输入店铺介绍');
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-,，.。 ]{0,40}$/.test(this.shop.introduce)){
+                    return Toast('店铺介绍仅支持中英文字符，数字，部分符号，且40个字符内');
+                }
+                if(!this.shop.tag){
+                    return Toast('请输入店铺标语');
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-,，.。 ]{0,10}$/.test(this.shop.tag)){
+                    return Toast('店铺标语仅支持中英文字符，数字，部分符号，且10个字符内');
+                }
+                if(!this.shop.types){
+                    return Toast('请选择店铺分类')
+                }
+                if(!this.shop.date1 || !this.shop.date2 ){
+                    return Toast('请选择营业时间段')
+                }
+                const shopData = {
+                    shop_name:this.shop.name,
+                    shop_address:this.shop.detailAddress,
+                    shop_phone:this.shop.phone,
+                    shop_detail:this.shop.introduce,
+                    shop_tag:this.shop.tag,
+                    shop_type:this.shop.types.join('-'),
+                    shop_characteristics:this.shop.characteristics.join('-'),
+                    shop_float_delivery_fee:this.shop.float_delivery_fee,
+                    shop_float_minimum_order_amount:this.shop.float_minimum_order_amount,
+                    shop_date1:this.shop.date1,
+                    shop_date2:this.shop.date2,
+                    shop_user_id:this.userinfo._id,
+                    tableData:this.tableData
+                };
+                console.log(shopData);
+                reqSaveShop(shopData);
                 console.log('submit!');
             },
             handleAvatarSuccess(res, file) {

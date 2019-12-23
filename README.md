@@ -95,3 +95,12 @@
     food_price,价格
     food_shop_id商品所属的商铺id
 ）
+
+>2019/12/23
+1. 完成addMerchant.vue组件表单数据的验证
+2. 完成上面所说组件的前端api调用即reqSaveShop()
+3. 后端完成'/elm_back/save_shop'接口的实现，同时对数据库内两个相关表格进行操作
+4. 后端完成'/elm_back/get_userList'接口的实现,get,每次获取用户信息10条
+5. 前端 在userList组件中完成对用户列表的加载显示与操作实现每次请求10条数据
+6. 后端完成'/elm_back/get_shopList'接口的实现,get,每次获取商铺信息10条
+7. 前端 在merchantList组件中完成对商铺列表的加载显示与操作实现每次请求10条数据
