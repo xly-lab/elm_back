@@ -40,8 +40,9 @@
         methods: {
             onLoad() {
                 // 异步更新数据
-                reqUserList({header,tail:header=header+10}).then((res)=>{
+                reqUserList({header,tail:10}).then((res)=>{
                     console.log("res",res);
+                    header+=10;
                     for(let i=0;i<res.data.length;i++){
                         console.log(res.data[i].register_time);
                         res.data[i].register_time =new moment(res.data[i].register_time/1).format('YYYY-MM-DD')

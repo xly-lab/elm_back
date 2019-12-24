@@ -157,7 +157,8 @@
             },
             onLoad() {
                 // 异步更新数据
-                reqShopList({header,tail:header=header+10}).then((res)=>{
+                reqShopList({header,tail:10}).then((res)=>{
+                    header+=10;
                     console.log("res",res);
                     this.list.push(...res.data);
                     console.log(this.list);

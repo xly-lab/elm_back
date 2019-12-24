@@ -42,7 +42,8 @@
         methods: {
             onLoad() {
                 // 异步更新数据
-                reqAdminList({header,tail:header=header+10}).then((res)=>{
+                reqAdminList({header,tail:10}).then((res)=>{
+                    header+=10;
                     console.log("res",res);
                     for(let i=0;i<res.data.length;i++){
                         console.log(res.data[i].register_time);
