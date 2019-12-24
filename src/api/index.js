@@ -18,3 +18,8 @@ export const reqShopList = (data) => ajax('/elm_back/get_shopList',data);
 
 //获取首页相关数据
 export const reqFirstPageData = () => ajax('/elm_back/show_data');
+
+//获取管理员信息列表
+export const reqAdminList = (data) => ajax('/elm_back/get_adminList',data);
+
+
