@@ -296,7 +296,7 @@
         watch:{
             action(n,o){
                 switch (n[0]) {
-                    case 'manjianyouhui':
+                    case '满减优惠':
                         this.$prompt('请输入活动内容', '提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消'
@@ -309,7 +309,7 @@
                         }).catch(() => {
                         });
                         break;
-                    case 'youhuidachoubin':
+                    case '优惠大酬宾':
                         this.$prompt('请输入活动内容', '提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消'
@@ -322,7 +322,7 @@
                         }).catch(() => {
                         });
                         break;
-                    case 'xinyonghulijian':
+                    case '新用户立减':
                         this.$prompt('请输入活动内容', '提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消'
@@ -335,7 +335,7 @@
                         }).catch(() => {
                         });
                         break;
-                    case 'jindianlingjuan':
+                    case '进店领卷':
                         this.$prompt('请输入活动内容', '提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消'

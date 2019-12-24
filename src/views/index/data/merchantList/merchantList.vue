@@ -156,17 +156,20 @@
                 return isJPG && isLt2M;
             },
             onLoad() {
+                const listLen = this.list.length;
+                let listEndLen;
                 // 异步更新数据
                 reqShopList({header,tail:10}).then((res)=>{
                     header+=10;
                     console.log("res",res);
                     this.list.push(...res.data);
+                    listEndLen = this.list.length;
                     console.log(this.list);
                     this.loading = false
                 }).catch(()=>{
                     this.error = true;
                 }).finally(()=>{
-                    if(this.list.length%10!==0){
+                    if(this.list.length%10!==0||listLen===listEndLen){
                         this.finished = true;
                     }
                 })

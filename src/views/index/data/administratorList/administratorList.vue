@@ -41,6 +41,8 @@
         },
         methods: {
             onLoad() {
+                const listLen = this.list.length;
+                let listEndLen;
                 // 异步更新数据
                 reqAdminList({header,tail:10}).then((res)=>{
                     header+=10;
@@ -50,12 +52,13 @@
                         res.data[i].register_time =new moment(res.data[i].register_time/1).format('YYYY-MM-DD')
                     }
                     this.list.push(...res.data);
+                    listEndLen = this.list.length;
                     console.log(this.list);
                     this.loading = false
                 }).catch(()=>{
                     this.error = true;
                 }).finally(()=>{
-                    if(this.list.length%10!==0){
+                    if(this.list.length%10!==0||listLen===listEndLen){
                         this.finished = true;
                     }
                 })
