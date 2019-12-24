@@ -25,7 +25,7 @@
                             </div>
                             <div class="shop_info_handle">
                                 <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
-                                <van-button type="info" size="small" plain hairline @click="addFood">添加商品</van-button>
+                                <van-button type="info" size="small" plain hairline @click="addFood(item.shop_id)">添加商品</van-button>
                                 <van-button type="danger" plain hairline size="small">删除</van-button>
                             </div>
                         </div>
@@ -121,6 +121,7 @@
         },
         mounted(){
             this.options=options.options;
+            header=0
         },
         methods:{
             changeIcon(){
@@ -131,8 +132,13 @@
             compileInfo(){
 
             },
-            addFood(){
-                this.$router.replace('/index/adddata')
+            addFood(e){
+                this.$router.replace({
+                    name:'addData_addFood',
+                    params:{
+                        shop_id:e
+                    }
+                })
             },
             handleAvatarSuccess(res, file) {
                 this.imageUrl = URL.createObjectURL(file.raw);

@@ -15,3 +15,6 @@ export const reqUserList = (data) => ajax('/elm_back/get_userList',data);
 
 //获取商铺列表
 export const reqShopList = (data) => ajax('/elm_back/get_shopList',data);
+
+//获取首页相关数据
+export const reqFirstPageData = () => ajax('/elm_back/show_data');

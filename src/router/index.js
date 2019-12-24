@@ -65,6 +65,7 @@ export default new VueRouter({
                     component:()=>import('../views/index/data/orderList/orderList')
                 }, {
                     path:'/adddata/addfood',//添加食物
+                    name:'addData_addFood',
                     component:()=>import('../views/index/addData/addFood/addFood')
                 }, {
                     path:'/adddata/addmerchant',//添加商店

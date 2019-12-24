@@ -34,6 +34,9 @@
                 error:false
             };
         },
+        mounted(){
+            header=0
+        },
         methods: {
             onLoad() {
                 // 异步更新数据
@@ -53,7 +56,6 @@
                         this.finished = true;
                     }
                 })
-
             },
         },
     }

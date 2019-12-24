@@ -121,10 +121,11 @@
 </template>
 
 <script>
-    import {Notify} from 'vant'
+    import {Toast} from 'vant'
     export default {
         data(){
             return{
+                shop_id:'',
                 food: {
                     packaging_fee:'',//包装费
                     price:'',//价格
@@ -149,6 +150,15 @@
             }
         },
         mounted(){
+                this.$nextTick(()=>{
+                    console.log(this.$route.params);
+                    if( Object.keys(this.$route.params).length===0){
+                        Toast('请选择商铺');
+                        return this.$router.back()
+                    }else {
+                        this.shop_id=this.$route.params.shop_id
+                    }
+                })
 
         },
         methods: {
@@ -181,6 +191,16 @@
                 },500)
             },
         },
+        watch:{
+            shop_id(n){
+                if(n===''||n===undefined){
+                    Toast('请选择商铺');
+                    return this.$router.back()
+                }else {
+                    this.shop_id = n;
+                }
+            }
+        }
     }
 </script>
 

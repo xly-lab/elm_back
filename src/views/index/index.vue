@@ -4,9 +4,9 @@
                 :left_text="HeaderConfig($route.path).left_text"
                 :left_arrow="HeaderConfig($route.path).left_arrow"
         />
-        <keep-alive>
+
             <router-view/>
-        </keep-alive>
+
         <van-tabbar v-model="active"  active-color="#fff" inactive-color="#000" v-if="$route.meta.showFooter" >
             <van-tabbar-item  @click="replaceRouter('/index/fpage')" icon="wap-home">首页</van-tabbar-item>
             <van-tabbar-item  @click="replaceRouter('/index/data')"  icon="cluster">数据管理</van-tabbar-item>

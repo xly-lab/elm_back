@@ -4,16 +4,16 @@
             <h3 style="">数据统计</h3>
             <div class="tag_list">
                 <div class="tag_list_item1">
-                    <van-tag mark type="primary">当日数据:</van-tag>
-                    <van-tag mark color="rgba(53, 142, 189, 0.77)">新增用户</van-tag>
-                    <van-tag mark type="danger">新增订单</van-tag>
-                    <van-tag mark type="warning">新增管理员</van-tag>
+                    <van-tag mark type="primary">当日数据</van-tag>
+                    <van-tag mark type="success">新增用户:&nbsp;{{allData.user_1}}</van-tag>
+                    <van-tag mark type="danger">新增店铺:&nbsp;{{allData.shop_1}}</van-tag>
+                    <van-tag mark type="warning">新增管理员:&nbsp;{{allData.user_1}}</van-tag>
                 </div>
                 <div class="tag_list_item2">
-                    <van-tag mark type="primary">总数据:</van-tag>
-                    <van-tag mark type="success">用户</van-tag>
-                    <van-tag mark type="danger">订单</van-tag>
-                    <van-tag mark type="warning">管理员</van-tag>
+                    <van-tag mark type="primary">总数据</van-tag>
+                    <van-tag mark type="success">用户:&nbsp;{{allData.all_users}}</van-tag>
+                    <van-tag mark type="danger">店铺:&nbsp;{{allData.all_shops}}</van-tag>
+                    <van-tag mark type="warning">管理员:&nbsp;{{allData.all_users}}</van-tag>
                 </div>
             </div>
             <div class="echar">
@@ -25,58 +25,79 @@
 
 <script>
     import echarts from 'echarts'
+    import moment from 'moment'
+    import {reqFirstPageData} from '../../../api'
     export default {
-        mounted(){
-            const myChart = echarts.init(document.getElementById('ii'));
-            let option = {
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data:['视频广告','直接访问','搜索引擎']
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['2019/12/8','周二','周三','周四']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [
-                    {
-                        name:'视频广告',
-                        type:'line',
-                        stack: '总量',
-                        data:[ 154, 190, 330, 410]
-                    },
-                    {
-                        name:'直接访问',
-                        type:'line',
-                        stack: '总量',
-                        data:[ 334, 390, 330, 320]
-                    },
-                    {
-                        name:'搜索引擎',
-                        type:'line',
-                        stack: '总量',
-                        data:[934, 1290, 6330, 1320]
-                    }
-                ]
-            };
-            myChart.setOption(option);
+        data(){
+            return{
+                allData:{}
+            }
         },
+        mounted(){
+            reqFirstPageData().then(res=>{
+                console.log(res);
+                this.allData = res.data;
+            });
+        },
+        watch:{
+            allData(n){
+                this.$nextTick(()=>{
+                    const myChart = echarts.init(document.getElementById('ii'));
+                    // debugger
+                    let option = {
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data:['新增用户数量','新增店铺','新增管理员']
+                        },
+                        grid: {
+                            left: '5%',
+                            right: '5%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: [ moment(Date.now()-86400000*3).format("MM-DD"),
+                                moment(Date.now()-86400000*2).format("MM-DD"),
+                                moment(Date.now()-86400000*1).format("MM-DD"),
+                                moment(Date.now()).format("MM-DD")           ]
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name:'新增用户数量',
+                                type:'line',
+                                stack: '总量',
+                                data:[ n.user_4, n.user_3, n.user_2, n.user_1]
+                            },
+                            {
+                                name:'新增店铺',
+                                type:'line',
+                                stack: '总量',
+                                data:[ n.shop_4, n.shop_3, n.shop_2,n.shop_1]
+                            },
+                            {
+                                name:'新增管理员',
+                                type:'line',
+                                stack: '总量',
+                                data:[ n.user_4, n.user_3, n.user_2, n.user_1]
+                            }
+                        ]
+                    };
+                    myChart.setOption(option);
+                })
+            }
+        }
     }
 </script>
 
@@ -121,6 +142,7 @@
         height: 30px;
         margin: 5px;
         display: flex;
+        text-align: center;
         justify-content: space-around;
     }
     .van-tag{

@@ -1,217 +1,217 @@
 export default {
     options: [
         {
-        value: 'yiguoliaoli',
+        value: '异国料理',
         label: '异国料理',
         children: [{
-            value: 'rihanliaoli',
+            value: '日韩料理',
             label: '日韩料理',
         }, {
-            value: 'xican',
+            value: '西餐',
             label: '西餐',
         },{
-            value: 'pisayimian',
+            value: '披萨意面',
             label: '披萨意面',
         },{
-            value: 'dongnanyacai',
+            value: '东南亚菜',
             label: '东南亚菜',
         }]
     },
         {
-        value: 'kuaicanbiandang',
+        value: '快餐便当',
         label: '快餐便当',
         children: [{
-            value: 'jiancan',
+            value: '简餐',
             label: '简餐',
         }, {
-            value: 'gaijiaofan',
+            value: '盖浇饭',
             label: '盖浇饭',
         },{
-            value: 'mifenmianguan',
+            value: '米粉面馆',
             label: '米粉面馆',
         },{
-            value: 'baozizhoudian',
+            value: '包子粥店',
             label: '包子粥店',
         },{
-            value: 'xiangguoshaguo',
+            value: '香锅砂锅',
             label: '香锅砂锅',
         },{
-            value: 'malatang',
+            value: '麻辣烫',
             label: '麻辣烫',
         },{
-            value: 'jiaozihundun',
+            value: '饺子混沌',
             label: '饺子混沌',
         },{
-            value: 'hanbao',
+            value: '汉堡',
             label: '汉堡',
         },{
-            value: 'shengjianguotie',
+            value: '生煎锅贴',
             label: '生煎锅贴',
         },{
-            value: 'huangmenjimifan',
+            value: '黄焖鸡米饭',
             label: '黄焖鸡米饭',
         },{
-            value: 'shaolafan',
+            value: '烧腊饭',
             label: '烧腊饭',
         },{
-            value: 'baozaifan',
+            value: '煲仔饭',
             label: '煲仔饭',
         },{
-            value: 'galifan',
+            value: '咖喱饭',
             label: '咖喱饭',
         }]
     },
         {
-            value: 'xiaochiyeixao',
+            value: '小吃夜宵',
             label: '小吃夜宵',
             children: [{
-                value: 'xiaolongxia',
+                value: '小龙虾',
                 label: '小龙虾',
             }, {
-                value: 'difangxiaochi',
+                value: '地方小吃',
                 label: '地方小吃',
             },{
-                value: 'shaokao',
+                value: '烧烤',
                 label: '烧烤',
             },{
-                value: 'zhajizhachuan',
+                value: '炸鸡炸串',
                 label: '炸鸡炸串',
             },{
-                value: 'yaboluwei',
+                value: '鸭脖卤味',
                 label: '鸭脖卤味',
             },{
-                value: 'lingshi',
+                value: '零食',
                 label: '零食',
             }]
         },
         {
-            value: 'guoshushengxian',
+            value: '果蔬生鲜',
             label: '果蔬生鲜',
             children: [{
-                value: 'shuiguo',
+                value: '水果',
                 label: '水果',
             }, {
-                value: 'shengxian',
+                value: '生鲜',
                 label: '生鲜',
             },{
-                value: 'shucai',
+                value: '蔬菜',
                 label: '蔬菜',
             },{
-                value: 'haixianshuichan',
+                value: '海鲜水产',
                 label: '海鲜水产',
             }]
         },
         {
-            value: 'tesecaixi',
+            value: '特色菜系',
             label: '特色菜系',
             children: [{
-                value: 'chuanxiangcai',
+                value: '川湘菜',
                 label: '川湘菜',
             }, {
-                value: 'qitacaixi',
+                value: '其他菜系',
                 label: '其他菜系',
             },{
-                value: 'jiangzhecai',
+                value: '江浙菜',
                 label: '江浙菜',
             },{
-                value: 'yuecai',
+                value: '粤菜',
                 label: '粤菜',
             },{
-                value: 'haixian',
+                value: '海鲜',
                 label: '海鲜',
             },{
-                value: 'huoguogaoyu',
+                value: '火锅烤鱼',
                 label: '火锅烤鱼',
             },{
-                value: 'dongbeicai',
+                value: '东北菜',
                 label: '东北菜',
             },{
-                value: 'xibeicai',
+                value: '西北菜',
                 label: '西北菜',
             },{
-                value: 'yunnancai',
+                value: '云南菜',
                 label: '云南菜',
             },{
-                value: 'jinjiangcai',
+                value: '新疆菜',
                 label: '新疆菜',
             },{
-                value: 'lucai',
+                value: '鲁菜',
                 label: '鲁菜',
             }]
         },
         {
-            value: 'shangdianchaoshi',
+            value: '商店超市',
             label: '商店超市',
             children: [{
-                value: 'chaoshi',
+                value: '超市',
                 label: '超市',
             }, {
-                value: 'bianlidian',
+                value: '便利店',
                 label: '便利店',
             },{
-                value: 'mingjiufang',
+                value: '名酒坊',
                 label: '名酒坊',
             },{
-                value: 'lingshiyinliao',
+                value: '零食饮料',
                 label: '零食饮料',
             },{
-                value: 'shuizhan',
+                value: '水站',
                 label: '水站',
             },{
-                value: 'cha',
+                value: '茶',
                 label: '茶',
             },{
-                value: 'naizhan',
+                value: '奶站',
                 label: '奶站',
             },{
-                value: 'liangyou',
+                value: '粮油',
                 label: '粮油',
             },{
-                value: 'meizhuangmuying',
+                value: '美妆母婴',
                 label: '美妆母婴',
             }]
         },
         {
-            value: 'xianhuadangao',
+            value: '鲜花蛋糕',
             label: '鲜花蛋糕',
             children: [{
-                value: 'xianhua',
+                value: '鲜花',
                 label: '鲜花',
             }, {
-                value: 'dangao',
+                value: '蛋糕',
                 label: '蛋糕',
             },{
-                value: 'mianbao',
+                value: '面包',
                 label: '面包',
             }]
         },
         {
-            value: 'tianpinyinpin',
+            value: '甜品饮品',
             label: '甜品饮品',
             children: [{
-                value: 'naichaguozhi',
+                value: '奶茶果汁',
                 label: '奶茶果汁',
             }, {
-                value: 'tianpin',
+                value: '甜品',
                 label: '甜品',
             },{
-                value: 'kafei',
+                value: '咖啡',
                 label: '咖啡',
             }]
         },
     ],
     activities:[
         {
-        value: 'manjianyouhui',
+        value: '满减优惠',
         label: '满减优惠',
     }, {
-        value: 'youhuidachoubin',
+        value: '优惠大酬宾',
         label: '优惠大酬宾',
     },{
-        value: 'xinyonghulijian',
+        value: '新用户立减',
         label: '新用户立减',
     },{
-        value: 'jindianlingjuan',
+        value: '进店领卷',
         label: '进店领卷',
     }],
     tableData:[{

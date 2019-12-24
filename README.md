@@ -7,7 +7,7 @@
 1. 登陆界面放在app.vue里面
 2. 封装api请求
 3. 在云服务器的数据库创建elm_back_userinfo表(username,pass,user_type,user_address,register_time)
-4. 在node后端增添/save_user路由接口(username,pass,user_type,register_time)
+4. 在node后端增添`/save_user`路由接口(username,pass,user_type,register_time)
 5. postman测试该接口
 
 注：该接口并未完成，user_address字段还未获取
@@ -20,7 +20,7 @@
 4. 引入vant-ui组件库
 5. 测试/save_user接口
 6. 开发环境下请求本地后台接口
-    ```javascript
+    ```javascript 
     devServer:{
             proxy:{
                 '/vue':{
@@ -63,28 +63,32 @@
 
 > 2019/12/20
 1. 在other组件页面添加退出功能，退出时清除cookie
-2. 设计完成elm_back_shop_list数据表，其字段为(
-    shop_id,商铺id
-    shop_name,商铺名称
-    shop_address,商铺地址
-    shop_phone,商铺电话
-    shop_detail,商铺介绍
-    shop_tag,商铺标语
-    shop_type,商铺类型
-    shop_characteristics,商铺特点
-    shop_float_delivery_fee,配送费
-    shop_float_minimum_order_amount,起送价
-    shop_date1,营业初始时间
-    shop_date2,营业结束时间
-    shop_user_id商铺所属的用户id)
-3. 设计完成elm_back_shop_list的子表elm_back_shop_list_table_data,此表用于存放商铺里的活动信息其字段信息为（
+2. 设计完成elm_back_shop_list数据表，其字段为
+```javascript 
+    shop_id,商铺id,
+    shop_name,商铺名称,
+    shop_address,商铺地址,
+    shop_phone,商铺电话,
+    shop_detail,商铺介绍,
+    shop_tag,商铺标语,
+    shop_type,商铺类型,
+    shop_characteristics,商铺特点,
+    shop_float_delivery_fee,配送费,
+    shop_float_minimum_order_amount,起送价,
+    shop_date1,营业初始时间,
+    shop_date2,营业结束时间,
+    shop_user_id,商铺所属的用户id,
+```
+3. 设计完成elm_back_shop_list的子表elm_back_shop_list_table_data,此表用于存放商铺里的活动信息其字段信息为
+```javascript 
     active_name,活动名称
     active_tag,活动标识
     active_text,活动内容
     shop_table_data_id,商铺数据表id标识
-    active_shop_id,活动所属的商铺id
-    ）
-4. 设计完成elm_back_food_list数据表，其字段为（
+    active_shop_id,活动所属的商铺id  
+```
+4. 设计完成elm_back_food_list数据表，其字段为
+```javascript 
     food_name,商品名称
     food_id,商品唯一id
     food_active,商品活动信息
@@ -93,14 +97,34 @@
     food_specifications,商品规格，0为单规格，1为多规格
     food_packaging_fee,打包费
     food_price,价格
-    food_shop_id商品所属的商铺id
-）
-
->2019/12/23
+    food_shop_id商品所属的商铺id 
+```
+> 2019/12/23
 1. 完成addMerchant.vue组件表单数据的验证
 2. 完成上面所说组件的前端api调用即reqSaveShop()
-3. 后端完成'/elm_back/save_shop'接口的实现，同时对数据库内两个相关表格进行操作
-4. 后端完成'/elm_back/get_userList'接口的实现,get,每次获取用户信息10条
+3. 后端完成`'/elm_back/save_shop'`接口的实现，同时对数据库内两个相关表格进行操作
+4. 后端完成`'/elm_back/get_userList'`接口的实现,get,每次获取用户信息10条
 5. 前端 在userList组件中完成对用户列表的加载显示与操作实现每次请求10条数据
-6. 后端完成'/elm_back/get_shopList'接口的实现,get,每次获取商铺信息10条
+6. 后端完成`'/elm_back/get_shopList'`接口的实现,get,每次获取商铺信息10条
 7. 前端 在merchantList组件中完成对商铺列表的加载显示与操作实现每次请求10条数据
+
+> 2019/12/24
+1. 后端完成`/show_data`,即首页显示的数据，包括有多少用户，多少商铺，多少管理员
+2. 完成对`/show_data`接口的请求获取首页需要显示的数据，完成折线图的显示
+3. fpage组件遇到的问题 
+
+> 1.首页显示数据时，请求上述接口时遇到数据请求到了，但是没有显示到页面上，首先
+> 接口调用实在mounted周期函数里调用的，设置echar图形对象也是在mountedli调用的，
+> 因为接口调用是异步的，后端的数据还没有返回，前端echar图形对象就以实现但数据却
+> 没有即使跟新，最后使用watch监听数据，把接口调用还是放在mounted里面，并把请求的数据
+> 保存在allData里，从而监听addData，如果数据有了，在对echar图形对象进行前端的显示
+ 
+4.| 实现addFood.vue组件，在没有收到shop_id这个字段信息时，是无法进入该组件的，又遇到问题
+
+> 2.在merchantList.vue组件里通过`添加商铺`按钮进入addFood.vue组件就会收到shop_id字段
+> 但是又出现之前的上面所谈到的问题，shop_id字段的数据有没有收到，解决在mounted里实现从路由
+> 传过来的shop_id字段赋值到data里的shop_id，再在watch里监听该字段shop_id，再对其进行判断是
+> 否退出addFood组件，第一次所说可以实现弹出该组件，但是第二次从添加商品直接进入，就不会退出了
+> 后续就用实现上面问题同样的方法也没有解决，最后试着把keep-alive这个标签去掉后就能实现所需要求
+> 我想应该是将之前的shop_id做了缓存，直接从添加食物进入，之前的shop_id字段数据还存在，所以判断
+> 不起作用了
