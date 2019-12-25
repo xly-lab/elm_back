@@ -61,4 +61,10 @@
         top:0;
         color: white;
     }
+    >>>.van-nav-bar__text{
+        color: white;
+    }
+    >>>.van-nav-bar .van-icon{
+        color: white;
+    }
 </style>

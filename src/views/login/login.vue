@@ -31,10 +31,13 @@
                         v-model="checkPass"
                         type="password"
                 />
+
             </van-cell-group>
+            <p class="more_info">注:不须注册，首次登录即为注册，有账号可直接登录</p>
             <div class="_button">
                 <van-button type="primary" @click="handleSubmit">登&nbsp;录</van-button>
                 <van-button type="default" @click="reset">重&nbsp;置</van-button>
+
             </div>
         </div>
     </div>
@@ -196,7 +199,10 @@
         left: 50%;
         margin-left: -150px;
     }
-
+    .more_info{
+        color: red;
+        font-size: 12px;
+    }
 </style>
 <style scoped>
     .van-icon {

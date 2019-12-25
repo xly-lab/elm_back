@@ -104,7 +104,7 @@ export  function headerConfig (path) {
             break;
         case '/other/admin':
             headerConfigs ={
-                title:'管理员设置',
+                title:'个人信息',
                 left_text:'返回',
                 left_arrow:true
             };

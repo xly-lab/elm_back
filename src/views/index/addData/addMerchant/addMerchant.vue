@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="add_merchant">
+        <div class="add_merchant" v-if="show_add_merchant">
             <el-form ref="form" :model="shop" label-width="80px">
                 <el-form-item label="店铺名称">
                     <el-input v-model="shop.name" placeholder="请输入商铺名称"></el-input>
@@ -133,6 +133,12 @@
                     <el-button @click="$router.back()">取消</el-button>
                 </el-form-item>
             </el-form>
+        </div >
+        <div class="add_merchant_success" v-else>
+            <van-icon name="passed"
+                      color="rgb(61, 210, 121)"
+                      size="100"/>
+            <p>添加成功</p>
         </div>
     </div>
 </template>
@@ -145,6 +151,7 @@
     export default {
         data() {
             return {
+                show_add_merchant:true,
                 shop: {
                     float_delivery_fee:'',//配送费
                     float_minimum_order_amount:'',//起送价
@@ -236,7 +243,9 @@
                     tableData:this.tableData
                 };
                 console.log(shopData);
-                reqSaveShop(shopData);
+                reqSaveShop(shopData).then(res=>{
+                    this.show_add_merchant=false;
+                });
                 console.log('submit!');
             },
             handleAvatarSuccess(res, file) {
@@ -364,6 +373,9 @@
     .el-checkbox-group {
         display: flex;
         flex-wrap: wrap;
+    }
+    .add_merchant_success{
+        margin: 50% auto;
     }
     .avatar_header{
         display: flex;

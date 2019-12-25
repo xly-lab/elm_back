@@ -7,13 +7,13 @@
                     <van-tag mark type="primary">当日数据</van-tag>
                     <van-tag mark type="success">新增用户:&nbsp;{{allData.user_1}}</van-tag>
                     <van-tag mark type="danger">新增店铺:&nbsp;{{allData.shop_1}}</van-tag>
-                    <van-tag mark type="warning">新增管理员:&nbsp;{{allData.user_1}}</van-tag>
+                    <van-tag mark type="warning">新增商品:&nbsp;{{allData.food_1}}</van-tag>
                 </div>
                 <div class="tag_list_item2">
                     <van-tag mark type="primary">总数据</van-tag>
                     <van-tag mark type="success">用户:&nbsp;{{allData.all_users}}</van-tag>
                     <van-tag mark type="danger">店铺:&nbsp;{{allData.all_shops}}</van-tag>
-                    <van-tag mark type="warning">管理员:&nbsp;{{allData.all_users}}</van-tag>
+                    <van-tag mark type="warning">商品:&nbsp;{{allData.all_foods}}</van-tag>
                 </div>
             </div>
             <div class="echar">
@@ -43,13 +43,12 @@
             allData(n){
                 this.$nextTick(()=>{
                     const myChart = echarts.init(document.getElementById('ii'));
-                    // debugger
                     let option = {
                         tooltip: {
                             trigger: 'axis'
                         },
                         legend: {
-                            data:['新增用户数量','新增店铺','新增管理员']
+                            data:['新增用户数量','新增店铺','新增商品']
                         },
                         grid: {
                             left: '5%',
@@ -77,20 +76,17 @@
                             {
                                 name:'新增用户数量',
                                 type:'line',
-                                stack: '总量',
                                 data:[ n.user_4, n.user_3, n.user_2, n.user_1]
                             },
                             {
                                 name:'新增店铺',
                                 type:'line',
-                                stack: '总量',
                                 data:[ n.shop_4, n.shop_3, n.shop_2,n.shop_1]
                             },
                             {
-                                name:'新增管理员',
+                                name:'新增商品',
                                 type:'line',
-                                stack: '总量',
-                                data:[ n.user_4, n.user_3, n.user_2, n.user_1]
+                                data:[ n.food_4, n.food_3, n.food_2, n.food_1]
                             }
                         ]
                     };

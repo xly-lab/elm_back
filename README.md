@@ -136,3 +136,10 @@
 7.| 改善信息列表的查询，每次查询数据库10条时，sql语句里有个关键词limit，其两个参数是，第一个表示起始位置，第二个为偏移量
 
 8.| 改善信息列表的查询中，停止请求发送条件的完善
+
+> 2019/12/25
+1. 后端完成保存商品接口`/save_food`,更改商品接口`/change_food`，更改商铺接口`/change_shop`，删除商品接口`/delete_food`，
+2. 删除商铺接口`/delete_shop`，获取每个区域用户数量接口`/get_place_num`，
+3. 改进`/show_data`接口返回的数据
+4. 前端对相应接口获取得到的数据进行相对应的页面数据的显示，包括的页面有foodList.vue，merchantList.vue，fPage.vue，distribution.vue
+

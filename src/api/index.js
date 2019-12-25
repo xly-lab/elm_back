@@ -22,4 +22,24 @@ export const reqFirstPageData = () => ajax('/elm_back/show_data');
 //获取管理员信息列表
 export const reqAdminList = (data) => ajax('/elm_back/get_adminList',data);
 
+//保存食物
+export const reqSaveFood = (data) => ajax('/elm_back/save_food',data,'POST');
+
+//获取商品列表
+export const reqFoodList = (data) => ajax('/elm_back/get_foodList',data);
+
+//更改商品信息
+export const reqUpdateFood = (data) => ajax('/elm_back/change_food',data,'POST');
+
+//更改商店的信息
+export const reqUpdateShop = (data) => ajax('/elm_back/change_shop',data,'POST');
+
+//删除商铺
+export const reqDeleteShop = (data) => ajax('/elm_back/delete_shop',data,'POST');
+
+//删除商品
+export const reqDeleteFood = (data) => ajax('/elm_back/delete_food',data,'POST');
+
+//获取每个地区用户的数量
+export const reqPlaceNum = () => ajax('/elm_back/get_place_num');
 

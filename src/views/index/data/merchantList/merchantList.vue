@@ -10,8 +10,8 @@
                     <van-collapse-item :name="key"
                                        title="店铺名称"
                             icon="shop-o">
-                        <div slot="title" class="title_header" >{{item.shop_name}}
-                            <div class="more">查看详情</div>
+                        <div slot="title" class="title_header" @click="setShopInfo(item)">{{item.shop_name}}
+                            <div class="more" >查看详情</div>
                         </div>
                         <div class="shop_info">
                             <div class="shop_info_list">
@@ -26,79 +26,83 @@
                             <div class="shop_info_handle">
                                 <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
                                 <van-button type="info" size="small" plain hairline @click="addFood(item.shop_id)">添加商品</van-button>
-                                <van-button type="danger" plain hairline size="small">删除</van-button>
+                                <van-button  v-show="userinfo.user_type===3" type="danger" plain hairline size="small" @click="deleteShop(item.shop_id)">删除</van-button>
                             </div>
                         </div>
                     </van-collapse-item>
                 </van-collapse>
+                <van-overlay :show="show" @click="show = false">
+                    <div class="wrapper" @click="show=false">
+                        <div class="block" @click.stop>
+                            <h4 class="h4_header">修改店铺信息</h4>
+                            <van-cell-group>
+                                <van-field
+                                        v-model="shop_name"
+                                        clearable
+                                        disabled
+                                        label="店铺名称"
+                                        placeholder="请输入店铺名称"
+                                />
+                                <van-field
+                                        v-model="shop_address"
+                                        label="详细地址"
+                                        placeholder="请输入详细地址"
+                                        required
+                                />
+                                <van-field
+                                        v-model="shop_detail"
+                                        required
+                                        clearable
+                                        label="店铺介绍"
+                                        placeholder="请输入店铺介绍"
+                                />
+                                <van-field
+                                        v-model="shop_phone"
+                                        required
+                                        clearable
+                                        label="联系电话"
+                                        placeholder="请输入联系电话"
+                                />
+                                <div class="el_cascader">
+                                    <div>店铺分类</div>
+                                    <el-cascader :options="options" v-model="shop_type" clearable/>
+                                </div>
+                                <div class="avatar_header">
+                                    <div>店铺头像</div>
+                                    <el-upload
+                                            class="avatar-uploader"
+                                            action="https://jsonplaceholder.typicode.com/posts/"
+                                            :show-file-list="false"
+                                            :on-success="handleAvatarSuccess"
+                                            :before-upload="beforeAvatarUpload">
+                                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </div>
+                                <div class="button_">
+                                    <van-button type="info" plain hairline size="small" @click="changeShop">修改</van-button>
+                                    <van-button type="danger" plain hairline size="small" @click="show=false">取消</van-button>
+                                </div>
+                            </van-cell-group>
+
+                        </div>
+                    </div>
+
+                </van-overlay>
+
             </van-list>
 
 <!--            </van-list>-->
-            <van-overlay :show="show" @click="show = false">
-                <div class="wrapper" @click="show=false">
-                    <div class="block" @click.stop>
-                        <h4>修改店铺信息</h4>
-                        <van-cell-group>
-                            <van-field
-                                    v-model="shopName"
-                                    clearable
-                                    label="店铺名称"
-                                    placeholder="请输入店铺名称"
-                            />
 
-                            <van-field
-                                    v-model="shopAddress"
-                                    label="详细地址"
-                                    placeholder="请输入详细地址"
-                                    required
-                            />
-                            <van-field
-                                    v-model="shopMsg"
-                                    required
-                                    clearable
-                                    label="店铺介绍"
-                                    placeholder="请输入店铺介绍"
-                            />
-                            <van-field
-                                    v-model="shopPhone"
-                                    required
-                                    clearable
-                                    label="联系电话"
-                                    placeholder="请输入联系电话"
-                            />
-                            <div class="el_cascader">
-                                <div>店铺分类</div>
-                                <el-cascader :options="options" clearable/>
-                            </div>
-                            <div class="avatar_header">
-                                <div>店铺头像</div>
-                                <el-upload
-                                        class="avatar-uploader"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
-                                        :show-file-list="false"
-                                        :on-success="handleAvatarSuccess"
-                                        :before-upload="beforeAvatarUpload">
-                                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                                </el-upload>
-                            </div>
-                            <div class="button_">
-                                <van-button type="info" plain hairline size="small">修改</van-button>
-                                <van-button type="danger" plain hairline size="small">取消</van-button>
-                            </div>
-                        </van-cell-group>
-
-                    </div>
-                </div>
-
-            </van-overlay>
         </div>
     </div>
 </template>
 
 <script>
     import options from '../../../../assets/data'
-    import { reqShopList } from '../../../../api'
+    import { reqShopList,reqUpdateShop,reqDeleteShop } from '../../../../api'
+    import {Toast} from 'vant'
+    import {mapGetters} from 'vuex'
     let header = 0;
     export default {
         data(){
@@ -106,17 +110,19 @@
                 iconName:'arrow',
                 activeNames:[],
                 show:false,
-                shopName:'',
-                shopAddress:'',
-                shopPhone:'',
-                shopMsg:'',
+                shop_name:'',
+                shop_address:'',
+                shop_phone:'',
+                shop_detail:'',
                 showClass:false,
                 options:[],
                 imageUrl: '',
                 list: [],
                 loading: false,
                 finished: false,
-                error:false
+                error:false,
+                shop_type:'',
+                shop_id:'',
             }
         },
         mounted(){
@@ -124,6 +130,14 @@
             header=0
         },
         methods:{
+            setShopInfo(item){
+                this.shop_id=item.shop_id;
+                this.shop_name=item.shop_name;
+                this.shop_address=item.shop_address;
+                this.shop_detail=item.shop_detail;
+                this.shop_phone=item.shop_phone;
+                this.shop_type=item.shop_type.split('-');
+            },
             changeIcon(){
                 if(this.iconName==="arrow"){
                     this.iconName='arrow-down'
@@ -175,6 +189,66 @@
                 })
 
             },
+            changeShop(){
+                if(!this.shop_address){
+                    return Toast('请输入商铺地址')
+                }
+                if(!this.shop_detail){
+                    return Toast('请输入商铺介绍')
+                }
+                if(!this.shop_phone){
+                    return Toast('请输入商铺手机')
+                }
+                if(!/^1[3456789]\d{9}$/.test(this.shop_phone)){
+                    return Toast('请输入正确的号码');
+                }
+                if(!this.shop_type){
+                    return Toast('请输入商铺类型')
+                }
+                const changeShopInfo = {
+                    shop_id:this.shop_id,
+                    shop_address:this.shop_address,
+                    shop_detail:this.shop_detail,
+                    shop_phone:this.shop_phone,
+                    shop_type:this.shop_type.join('-')
+                };
+                reqUpdateShop(changeShopInfo).then((res)=>{
+                    if(res.code===0){
+                        this.show=false;
+                        this.$router.replace('/index/data');
+                        this.$message({
+                            message: '更新成功',
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            deleteShop(shop_id){
+                this.$confirm('此操作将永久删除该商铺, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    reqDeleteShop({shop_id}).then((res)=>{
+                        if(res.code===0){
+                            this.$router.replace('/index/data');
+                            this.$message({
+                                message: '删除成功',
+                                type: 'success'
+                            })
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+
+            }
+        },
+        computed:{
+            ...mapGetters(['userinfo'])
         }
     }
 </script>
@@ -206,13 +280,15 @@
         justify-content: center;
         height: 100%;
     }
-
+    .h4_header{
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+    }
     .block {
         width: 80%;
-        height: 60%;
         background-color: #fff;
         border-radius: 10px;
-        overflow: hidden;
     }
     .el_cascader{
         display: flex;

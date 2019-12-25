@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="add_food">
+        <div class="add_food" v-if="show_add_food">
             <el-form ref="form" :model="food" label-width="80px">
                 <el-form-item label="食物名称">
                     <el-input v-model="food.name"/>
@@ -117,14 +117,22 @@
                 </el-dialog>
             </el-form>
         </div>
+        <div class="add_food_success" v-else>
+            <van-icon name="passed"
+                      color="rgb(61, 210, 121)"
+                      size="100"/>
+            <p>添加成功</p>
+        </div>
     </div>
 </template>
 
 <script>
     import {Toast} from 'vant'
+    import {reqSaveFood} from '../../../../api'
     export default {
         data(){
             return{
+                show_add_food:true,
                 shop_id:'',
                 food: {
                     packaging_fee:'',//包装费
@@ -137,7 +145,6 @@
                     characteristics:1,//食物特点
                     specifications:0//食品规格
                 },
-                food_shop_id:'',
                 dialogImageUrl: '',
                 dialogVisible: false,
                 tableData:[],
@@ -170,10 +177,44 @@
                 this.dialogVisible = true;
             },
             onSubmit(){
+                if(!this.food.name){
+                    return Toast('请输入食品名称');
+                }
+                if(!(/^[\u4e00-\u9fa5a-zA-Z]{2,12}$/.test(this.food.name))){
+                    return Toast('商铺名称仅支持中英文字符');
+                }
+                if(!this.food.activities){
+                    return Toast('请输入食品活动');
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-,，.。 ]{0,40}$/.test(this.food.activities)){
+                    return Toast('食品活动仅支持中英文字符，数字，部分符号，且40个字符内');
+                }
+                if(!this.food.detail){
+                    return Toast('请输入食品活动');
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-,，.。 ]{0,40}$/.test(this.food.detail)){
+                    return Toast('食品活动仅支持中英文字符，数字，部分符号，且40个字符内');
+                }
                 if(this.food.specifications===1){
                     return this.$message.error('暂不支持多规格')
                 }
-                console.log('e')
+                const foodInfo={
+                    food_name:this.food.name,
+                    food_active:this.food.activities,
+                    food_detail:this.food.detail,
+                    food_characteristics:this.food.characteristics,
+                    food_specifications:this.food.specifications,
+                    food_packaging_fee:this.food.packaging_fee,
+                    food_price:this.food.price,
+                    food_shop_id:this.shop_id,
+                };
+                reqSaveFood(foodInfo).then((res)=>{
+                    if(res.code===1){
+                        this.$message.error(res.msg);
+                    }else {
+                        this.show_add_food=false
+                    }
+                });
             },
             addSpecifications(){
                 this.dialogFormVisible = true;
@@ -210,6 +251,9 @@
         box-shadow: 0px 0px 20px silver;
         padding: 5px;
         text-align: left;
+    }
+    .add_food_success{
+        margin: 50% auto;
     }
     .avatar_header{
         display: flex;
