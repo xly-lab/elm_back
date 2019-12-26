@@ -13,7 +13,7 @@
                 </div>
                 <div class="list_item" v-for="item in list ">
                     <div class="left">{{item.register_time}}</div>
-                    <div class="middle">{{item.username}}</div>
+                    <div class="middle">{{item.username.length>6?item.username.substring(0,6)+'...':item.username}}</div>
                     <div class="right">{{item.province}}</div>
                 </div>
             </van-list>

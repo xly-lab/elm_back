@@ -106,15 +106,16 @@
     .middle{
         flex: 1;
         height: 50px;
+        overflow: hidden;
         line-height: 50px;
     }
     .right_1{
-        width: 100px;
+        width: 80px;
         height: 50px;
         line-height: 50px;
     }
     .right_2{
-        width: 100px;
+        width: 80px;
         height: 50px;
         line-height: 50px;
     }
