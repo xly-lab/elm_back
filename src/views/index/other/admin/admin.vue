@@ -2,22 +2,22 @@
     <div class="admin_">
         <el-card class="box-card">
             <div slot="header" class="clearfix">
-                <span>卡片名称</span>
+                <span>我的信息</span>
             </div>
-            <Field value="只做显示作用"
+            <Field :value="userinfo?userinfo.username:userInfo.username"
                    label="用户名"
                    left-icon="contact"
                    disabled/>
-            <Field value="只做显示作用"
+            <Field :value="userinfo?type[userinfo.user_type-1]:type[userInfo.user_type-1]"
                    label="用户类型"
                    left-icon="friends-o"
                    disabled/>
-            <Field value="只做显示作用"
-                   label="用户注册地"
+            <Field :value="userinfo?userinfo.province:userInfo.province"
+                   label="注册地"
                    left-icon="location-o"
                    disabled/>
-            <Field value="只做显示作用"
-                   label="用户注册时间"
+            <Field :value="userinfo?Time(userinfo.register_time/1):Time(userInfo.register_time/1)"
+                   label="注册时间"
                    left-icon="clock-o"
                    disabled/>
         </el-card>
@@ -26,13 +26,35 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import {reqUserInfo} from '../../../../api'
+    import moment from 'moment'
     import { Field } from 'vant';
+    import Cookies from 'js-cookie'
     export default {
+        data(){
+            return{
+                type:['管理员','超级管理员','普通会员'],
+                userInfo:{}
+            }
+        },
+        mounted(){
+            const user_id = Cookies.get('_id');
+            console.log(Cookies.get('_id'));
+            reqUserInfo({_id:user_id}).then((res)=>{
+                console.log('res',res)
+                this.userInfo=res.data
+            })
+        },
         components:{
             Field
         },
         computed:{
             ...mapGetters(['userinfo'])
+        },
+        methods:{
+            Time(tiem_){
+                return moment(tiem_).format('YYYY-MM-DD')
+            }
         }
     }
 </script>

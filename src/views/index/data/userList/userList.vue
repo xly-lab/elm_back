@@ -70,10 +70,8 @@
         margin: 50px 0 0 0;
     }
     .list_item{
-        height: 50px;
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        height: 50px;
         border-bottom: 1px solid #cdcdcd;
         border-left: 1px solid #cdcdcd;
         border-right: 1px solid #cdcdcd;
@@ -83,4 +81,21 @@
         background-color: #eef1f6;
         border: 1px solid #cdcdcd;
     }
+
+    .left{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .middle{
+        flex: 1;
+        height: 50px;
+        line-height: 50px;
+    }
+    .right{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+
 </style>

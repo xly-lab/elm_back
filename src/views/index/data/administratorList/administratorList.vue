@@ -9,14 +9,14 @@
                 <div class="list_item list_item_top">
                     <div class="left">注册时间</div>
                     <div class="middle">用户名</div>
-                    <div class="right">注册地</div>
-                    <div class="right">权限</div>
+                    <div class="right_1">注册地</div>
+                    <div class="right_2">权限</div>
                 </div>
                 <div class="list_item" v-for="item in list ">
                     <div class="left">{{item.register_time}}</div>
-                    <div class="middle">{{item.username}}</div>
-                    <div class="right">{{item.province}}</div>
-                    <div class="right">{{userType(item.user_type)}}</div>
+                    <div class="middle">{{item.username.length>6?item.username.substring(0,6)+'...':item.username}}</div>
+                    <div class="right_1">{{item.province}}</div>
+                    <div class="right_2">{{userType(item.user_type)}}</div>
                 </div>
             </van-list>
         </div>
@@ -89,8 +89,6 @@
     .list_item{
         height: 50px;
         display: flex;
-        justify-content: space-around;
-        align-items: center;
         border-bottom: 1px solid #cdcdcd;
         border-left: 1px solid #cdcdcd;
         border-right: 1px solid #cdcdcd;
@@ -99,5 +97,25 @@
     .list_item_top{
         background-color: #eef1f6;
         border: 1px solid #cdcdcd;
+    }
+    .left{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .middle{
+        flex: 1;
+        height: 50px;
+        line-height: 50px;
+    }
+    .right_1{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+    }
+    .right_2{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
     }
 </style>

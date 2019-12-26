@@ -43,3 +43,5 @@ export const reqDeleteFood = (data) => ajax('/elm_back/delete_food',data,'POST')
 //获取每个地区用户的数量
 export const reqPlaceNum = () => ajax('/elm_back/get_place_num');
 
+//通过用户_id获取用户信息
+export const reqUserInfo = (data) => ajax('/elm_back/get_userinfo',data);

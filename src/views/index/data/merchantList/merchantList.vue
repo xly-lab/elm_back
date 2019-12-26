@@ -26,7 +26,7 @@
                             <div class="shop_info_handle">
                                 <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
                                 <van-button type="info" size="small" plain hairline @click="addFood(item.shop_id)">添加商品</van-button>
-                                <van-button  v-show="userinfo.user_type===3" type="danger" plain hairline size="small" @click="deleteShop(item.shop_id)">删除</van-button>
+                                <van-button  v-show="userinfo?userinfo.user_type==2:userInfo.user_type==2" type="danger" plain hairline size="small" @click="deleteShop(item.shop_id)">删除</van-button>
                             </div>
                         </div>
                     </van-collapse-item>
@@ -100,9 +100,10 @@
 
 <script>
     import options from '../../../../assets/data'
-    import { reqShopList,reqUpdateShop,reqDeleteShop } from '../../../../api'
+    import { reqShopList,reqUpdateShop,reqDeleteShop ,reqUserInfo} from '../../../../api'
     import {Toast} from 'vant'
     import {mapGetters} from 'vuex'
+    import Cookies from 'js-cookie'
     let header = 0;
     export default {
         data(){
@@ -123,11 +124,18 @@
                 error:false,
                 shop_type:'',
                 shop_id:'',
+                userInfo:{}
             }
         },
         mounted(){
             this.options=options.options;
-            header=0
+            header=0;
+            const user_id = Cookies.get('_id');
+            console.log(Cookies.get('_id'));
+            reqUserInfo({_id:user_id}).then((res)=>{
+                console.log('res',res);
+                this.userInfo=res.data
+            })
         },
         methods:{
             setShopInfo(item){

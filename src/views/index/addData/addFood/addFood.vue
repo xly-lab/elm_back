@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="add_food" v-if="show_add_food">
-            <el-form ref="form" :model="food" label-width="80px">
+            <el-form ref="form" :model="food" label-width="80px" enctype="multipart/form-data">
                 <el-form-item label="食物名称">
                     <el-input v-model="food.name"/>
                 </el-form-item>
@@ -14,8 +14,9 @@
                 <div class="avatar_header">
                     <div class="avatar_text">上传店铺头像</div>
                     <el-upload
-                            action="https://jsonplaceholder.typicode.com/posts/"
+                            action="http://localhost:3000/elm_back/photos"
                             list-type="picture-card"
+                            :before-upload="upImg"
                             :on-preview="handlePictureCardPreview"
                             :on-remove="handleRemove">
                         <i class="el-icon-plus"></i>
@@ -36,7 +37,6 @@
                         <el-radio :label="1">多规格</el-radio>
                     </el-radio-group>
                 </el-form-item>
-
                 <div class="single_specifications" v-show="food.specifications===0">
                     <el-form-item label="打包费" prop="packaging_fee">
                         <el-input-number v-model="food.packaging_fee" :min="0" :max="20"></el-input-number>
@@ -45,7 +45,6 @@
                         <el-input-number v-model="food.price" :min="0" :max="50"></el-input-number>
                     </el-form-item>
                 </div>
-
                 <div class="more_specifications" v-show="food.specifications===1">
                     <el-button type="primary" @click="addSpecifications">添加规格</el-button>
                     <el-table v-show="tableData.length>0"
@@ -93,7 +92,6 @@
                     </el-table>
 
                 </div>
-
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">立即创建</el-button>
                     <el-button @click="$router.back()">取消</el-button>
@@ -127,7 +125,7 @@
 </template>
 
 <script>
-    import {Toast} from 'vant'
+    import {Toast,Dialog} from 'vant'
     import {reqSaveFood} from '../../../../api'
     export default {
         data(){
@@ -153,6 +151,10 @@
                     specsName:'',
                     packing_fee:'',
                     price:''
+                },
+                uploadData:{
+                    articleId:'',
+                    url:''
                 }
             }
         },
@@ -160,18 +162,35 @@
                 this.$nextTick(()=>{
                     console.log(this.$route.params);
                     if( Object.keys(this.$route.params).length===0){
-                        Toast('请选择商铺');
-                        return this.$router.back()
+                        Dialog.confirm({
+                            title: '注意',
+                            message: '你没有选择商铺，不能成功添加食物，请到商铺列表选择商铺添加'
+                        }).then(() => {
+                            // on confirm
+                            return this.$router.replace('/index/merchantlist');
+                        }).catch(() => {
+                            // on cancel
+                            return this.$router.back()
+                        });
                     }else {
                         this.shop_id=this.$route.params.shop_id
                     }
                 })
-
         },
         methods: {
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
+            upImg(file){
+                console.log(file);
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = ()=> {
+                    file.url = reader.result;
+                    this.uploadData.articleId = this.shop_id;
+                    this.uploadData.url = file.url;
+                 }
+                },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
@@ -198,6 +217,9 @@
                 if(this.food.specifications===1){
                     return this.$message.error('暂不支持多规格')
                 }
+                if(!this.shop_id){
+                    return Toast('没有选择商铺');
+                }
                 const foodInfo={
                     food_name:this.food.name,
                     food_active:this.food.activities,
@@ -220,7 +242,7 @@
                 this.dialogFormVisible = true;
                 console.log('e')
             },
-            handleDelete(index,row){
+            handleDelete(index){
                 this.tableData.splice(index,1);
 
             },

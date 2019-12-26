@@ -31,13 +31,11 @@
                         v-model="checkPass"
                         type="password"
                 />
-
             </van-cell-group>
             <p class="more_info">注:不须注册，首次登录即为注册，有账号可直接登录</p>
             <div class="_button">
                 <van-button type="primary" @click="handleSubmit">登&nbsp;录</van-button>
                 <van-button type="default" @click="reset">重&nbsp;置</van-button>
-
             </div>
         </div>
     </div>
@@ -91,6 +89,14 @@
             async handleSubmit(){
                 if(!this.username){
                     this.warningText='用户名不能为空';
+                    this.showWarning=true;
+                    setTimeout(()=>{
+                        this.showWarning=false;
+                    },1000);
+                    return;
+                }
+                if(!/^[\u4e00-\u9fa50-9a-zA-Z-_]{0,12}$/.test(this.username)){
+                    this.warningText='用户名不合理';
                     this.showWarning=true;
                     setTimeout(()=>{
                         this.showWarning=false;
@@ -189,6 +195,7 @@
         margin-top: -40px;
         background-image: linear-gradient(#b9fffd, #f5ffad);
         box-shadow: 3px 1px 9px 1px silver;
+        z-index: 0;
     }
     ._button{
         position: absolute;
@@ -222,5 +229,6 @@
     }
     .el-alert {
         box-shadow: 0px 3px 3px 3px #c0c0c045;
+        z-index: 1;
     }
 </style>

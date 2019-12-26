@@ -34,10 +34,6 @@
             console.log(Cookies.get('_id'),this.active)
         },
         methods:{
-            req(){
-                console.log('www');
-                axios.get('http://www.xly.xyz:3000');
-            },
             replaceRouter(P){
                 if(this.$route.path!==P){
                     this.$router.replace(P)

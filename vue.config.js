@@ -1,3 +1,4 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     lintOnSave:false,
 
@@ -13,5 +14,23 @@ module.exports = {
                 }
             }
         }
-     }
+     },
+    configureWebpack: {
+        // provide the app's title in webpack's name field, so that
+        // it can be accessed in index.html to inject the correct title.
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        compress: {
+                            drop_console: false,//console.*
+                            drop_debugger: false,
+                            pure_funcs: ['console.log']//移除console
+                        }
+                    }
+                })
+            ]
+        },
+    },
+
 };

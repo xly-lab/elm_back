@@ -24,7 +24,7 @@
                             </div>
                             <div class="shop_info_handle">
                                 <van-button type="info" size="small" plain hairline @click="show=true">编辑</van-button>
-                                <van-button v-show="userinfo.user_type===3" type="danger" plain hairline size="small" @click="deleteFood(item.food_id)">删除</van-button>
+                                <van-button v-show="userinfo?userinfo.user_type==2:userInfo.user_type==2" type="danger" plain hairline size="small" @click="deleteFood(item.food_id)">删除</van-button>
                             </div>
                         </div>
                     </van-collapse-item>
@@ -101,9 +101,10 @@
 </template>
 
 <script>
-    import {reqFoodList,reqUpdateFood,reqDeleteFood} from '../../../../api'
+    import {reqFoodList, reqUpdateFood, reqDeleteFood, reqUserInfo} from '../../../../api'
     import {Toast} from 'vant'
     import {mapGetters} from 'vuex'
+    import Cookies from 'js-cookie'
     let header =0 ;
     export default {
         data(){
@@ -125,11 +126,18 @@
                 list: [],
                 loading: false,
                 finished: false,
-                error:false
+                error:false,
+                userInfo:{}
             }
         },
         mounted(){
             header=0;
+            const user_id = Cookies.get('_id');
+            console.log(Cookies.get('_id'));
+            reqUserInfo({_id:user_id}).then((res)=>{
+                console.log('res',res);
+                this.userInfo=res.data
+            })
         },
         methods:{
             setFoodInfo(item){
