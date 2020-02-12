@@ -48,8 +48,8 @@
                 <div class="more_specifications" v-show="food.specifications===1">
                     <el-button type="primary" @click="addSpecifications">添加规格</el-button>
                     <el-table v-show="tableData.length>0"
-                              :data="tableData"
-                              style="width: 100%">
+                            :data="tableData"
+                            style="width: 100%">
                         <el-table-column
                                 label="规格名称"
                                 width="180">
@@ -117,8 +117,8 @@
         </div>
         <div class="add_food_success" v-else>
             <van-icon name="passed"
-                      color="rgb(61, 210, 121)"
-                      size="100"/>
+                    color="rgb(61, 210, 121)"
+                    size="100"/>
             <p>添加成功</p>
         </div>
     </div>
@@ -168,9 +168,6 @@
                         }).then(() => {
                             // on confirm
                             return this.$router.replace('/index/merchantlist');
-                        }).catch(() => {
-                            // on cancel
-                            return this.$router.back()
                         });
                     }else {
                         this.shop_id=this.$route.params.shop_id
@@ -185,11 +182,11 @@
                 console.log(file);
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onloadend = ()=> {
-                    file.url = reader.result;
-                    this.uploadData.articleId = this.shop_id;
-                    this.uploadData.url = file.url;
-                 }
+                    reader.onloadend = ()=> {
+                        file.url = reader.result;
+                        this.uploadData.articleId = this.shop_id;
+                        this.uploadData.url = file.url;
+                    }
                 },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;

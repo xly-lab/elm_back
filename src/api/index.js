@@ -45,3 +45,6 @@ export const reqPlaceNum = () => ajax('/elm_back/get_place_num');
 
 //通过用户_id获取用户信息
 export const reqUserInfo = (data) => ajax('/elm_back/get_userinfo',data);
+
+//通过用户_id获取用户的所有商铺
+export const reqUserShops = (data) => ajax('/elm_back/user_shops',data)

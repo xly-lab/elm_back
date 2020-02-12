@@ -24,8 +24,8 @@ export default function ajax(url,data={},type="GET") {
         promise.then(response=>{
             resolve(response.data)
         })
-              .catch(err=>{
-                  reject(err)
-              })
+            .catch(err=>{ 
+                reject(err)
+            })  
     })
 }
