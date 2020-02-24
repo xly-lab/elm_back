@@ -12,13 +12,11 @@
                     <el-input v-model="food.detail"/>
                 </el-form-item>
                 <div class="avatar_header">
-                    <div class="avatar_text">上传店铺头像</div>
+                    <div class="avatar_text">上传商品头像</div>
                     <el-upload
                             action="http://localhost:3000/elm_back/photos"
                             list-type="picture-card"
-                            :before-upload="upImg"
-                            :on-preview="handlePictureCardPreview"
-                            :on-remove="handleRemove">
+                            :on-success="handleSuccess">
                         <i class="el-icon-plus"></i>
                     </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
@@ -141,8 +139,9 @@
                     types:'',//店铺分类
                     introduce:'',//食品介绍
                     characteristics:1,//食物特点
-                    specifications:0//食品规格
-                },
+                    specifications:0,//食品规格
+                    avatar:'',//食物图片
+                    },
                 dialogImageUrl: '',
                 dialogVisible: false,
                 tableData:[],
@@ -176,10 +175,10 @@
         },
         methods: {
             handleRemove(file, fileList) {
-                console.log(file, fileList);
+                console.log('删除图片',file, fileList);
             },
             upImg(file){
-                console.log(file);
+                console.log('上传中...',file);
                 let reader = new FileReader();
                 reader.readAsDataURL(file);
                     reader.onloadend = ()=> {
@@ -187,10 +186,15 @@
                         this.uploadData.articleId = this.shop_id;
                         this.uploadData.url = file.url;
                     }
-                },
+            },
+            handleSuccess(response, file, fileList){
+                console.log('上床成功',"response",response,'file',file,'fileList',fileList)
+                this.food.avatar = response.filename
+            },
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
+                console.log('上传成功？',file)
             },
             onSubmit(){
                 if(!this.food.name){
@@ -226,6 +230,7 @@
                     food_packaging_fee:this.food.packaging_fee,
                     food_price:this.food.price,
                     food_shop_id:this.shop_id,
+                    food_avatar:this.food.avatar
                 };
                 reqSaveFood(foodInfo).then((res)=>{
                     if(res.code===1){

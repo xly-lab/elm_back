@@ -50,7 +50,8 @@
 					<el-upload
 						class="avatar-uploader"
 						action="http://localhost:3000/elm_back/photos"
-						:show-file-list="false"
+						:show-file-list="true"
+						list-type="picture-card"
 						:on-success="handleAvatarSuccess"
 						:before-upload="beforeAvatarUpload"
 						:on-progress="testL"
@@ -63,8 +64,8 @@
 					<div>上传营业执照</div>
 					<el-upload
 						class="avatar-uploader"
-						action="https://jsonplaceholder.typicode.com/posts/"
-						:show-file-list="false"
+						action="http://localhost:3000/elm_back/photos"
+						list-type="picture-card"
 						:on-success="handleLicenseSuccess"
 						:before-upload="beforeLicenseUpload"
 					>
@@ -76,10 +77,9 @@
 					<div>上传餐饮许可证</div>
 					<el-upload
 						class="avatar-uploader"
-						action="https://jsonplaceholder.typicode.com/posts/"
-						:show-file-list="false"
+						action="http://localhost:3000/elm_back/photos"
+						list-type="picture-card"
 						:on-success="handlePermissionSuccess"
-						:before-upload="beforePermissionUpload"
 					>
 						<img v-if="imageUrlPermission" :src="imageUrlPermission" class="avatar" />
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -156,7 +156,10 @@ export default {
 				date2: "", //运营晚时间
 				introduce: "", //店铺介绍
 				characteristics: [], //商铺特点
-				tag: "" //商铺标语
+				tag: "", //商铺标语
+				avatar:'',//商铺头像
+				license:'',//商铺营业执照
+				permission:'',//商铺餐饮许可证
 			},
 			options: [],
 			action: "", //活动
@@ -261,7 +264,10 @@ export default {
 				shop_user_id: this.userinfo
 					? this.userinfo._id
 					: user_id,
-				tableData: this.tableData
+				tableData: this.tableData,
+				shop_avatar:this.shop.avatar,
+				shop_license:this.shop.license,
+				shop_permission:this.shop.permission
 			};
 			console.log(shopData);
 			reqSaveShop(shopData).then(res => {
@@ -269,15 +275,15 @@ export default {
 			});
 			console.log("submit!");
 		},
-		handleAvatarSuccess(res, file) {
-			console.log(res, file);
-			this.imageUrlAvatar = URL.createObjectURL(file.raw);
+		handleAvatarSuccess(response, file, fileList) {
+			
+			this.shop.avatar = response.filename
 		},
-		handleLicenseSuccess(res, file) {
-			this.imageUrlLicense = URL.createObjectURL(file.raw);
+		handleLicenseSuccess(response, file, fileList) {
+			this.shop.license = response.filename
 		},
-		handlePermissionSuccess(res, file) {
-			this.imageUrlPermission = URL.createObjectURL(file.raw);
+		handlePermissionSuccess(response, file, fileList) {
+			this.shop.permission = response.filename
 		},
 		beforeAvatarUpload(file) {
 			console.log(file);
