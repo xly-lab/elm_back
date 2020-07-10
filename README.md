@@ -1,5 +1,5 @@
 # only_element
-
+===========================周报1===================================
 > 使用vue全家栈 , element-ui, vant-ui
 
 ## 1.创建登陆界面
@@ -18,6 +18,7 @@
 2. 在云服务器的数据库增加elm_back_userinfo表字段改为(username,pass,user_type,register_time，city,province,distract,street,streetNumber)
 3. 改进登陆界面
 4. 引入vant-ui组件库
+===========================周报2===================================
 5. 测试/save_user接口
 6. 开发环境下请求本地后台接口
     ```javascript 
@@ -42,7 +43,7 @@
 3. 完成四个组件addData,data,firstPage,other路由index文件配置
 4. 引入echarts组，简单实现树状图样式
 5. 简单布局完成tabbar组件并实现路由跳转
-
+===========================周报3===================================
 > 2019/12/8
 1. 配置`数据管理`下的5个路由foodList,merchantList,orderList,userList,administratorList.
 2. 修改了Header组件，并使用headerConfig函数来控制该组件的显示
@@ -60,7 +61,7 @@
 1. 完成addMerchant组件的页面搭建，本页面为表单页面，存在数据较多
 2. 整个页面全用的element-ui组件
 
-
+===========================周报4===================================
 > 2019/12/20
 1. 在other组件页面添加退出功能，退出时清除cookie
 2. 设计完成elm_back_shop_list数据表，其字段为

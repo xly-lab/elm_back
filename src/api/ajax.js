@@ -2,6 +2,7 @@ import axios from 'axios'
 
 
 export default function ajax(url,data={},type="GET") {
+    //url:请求的路径名，data:传递的参数，type：请求的方式，GET，POST
     return new Promise((resolve, reject) => {
         let promise;
         let Str='';

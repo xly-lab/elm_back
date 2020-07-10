@@ -49,7 +49,7 @@
 					<div>上传店铺头像</div>
 					<el-upload
 						class="avatar-uploader"
-						action="http://localhost:3000/elm_back/photos"
+						action="http://www.xiely.xyz/vue/elm_back/photos"
 						:show-file-list="true"
 						list-type="picture-card"
 						:on-success="handleAvatarSuccess"
@@ -64,7 +64,7 @@
 					<div>上传营业执照</div>
 					<el-upload
 						class="avatar-uploader"
-						action="http://localhost:3000/elm_back/photos"
+						action="http://www.xiely.xyz/vue/elm_back/photos"
 						list-type="picture-card"
 						:on-success="handleLicenseSuccess"
 						:before-upload="beforeLicenseUpload"
@@ -77,7 +77,7 @@
 					<div>上传餐饮许可证</div>
 					<el-upload
 						class="avatar-uploader"
-						action="http://localhost:3000/elm_back/photos"
+						action="http://www.xiely.xyz/vue/elm_back/photos"
 						list-type="picture-card"
 						:on-success="handlePermissionSuccess"
 					>

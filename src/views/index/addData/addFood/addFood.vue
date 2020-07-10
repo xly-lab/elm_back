@@ -14,7 +14,7 @@
                 <div class="avatar_header">
                     <div class="avatar_text">上传商品头像</div>
                     <el-upload
-                            action="http://localhost:3000/elm_back/photos"
+                            action="http://www.xiely.xyz/vue/elm_back/photos"
                             list-type="picture-card"
                             :on-success="handleSuccess">
                         <i class="el-icon-plus"></i>
